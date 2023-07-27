@@ -1,3 +1,3 @@
 ## Do you like quizzes?
 
-Just click [**here**](quiz-io.vercel.app)
+Just click [**here**](https://quiz-io.vercel.app/)
