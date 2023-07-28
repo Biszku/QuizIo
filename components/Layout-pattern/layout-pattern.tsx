@@ -9,7 +9,7 @@ const poppins = Poppins({
   weight: "400",
 });
 
-function Layout({ children }: { children: React.ReactNode }) {
+function LayoutPattern({ children }: { children: React.ReactNode }) {
   return (
     <body className={poppins.className}>
       <Header />
@@ -23,4 +23,4 @@ function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default Layout;
+export default LayoutPattern;
