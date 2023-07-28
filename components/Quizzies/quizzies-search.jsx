@@ -1,8 +1,4 @@
 function QuizziesSearch() {
-  return (
-    <article className="general-container_search">
-      <h1>Search</h1>
-    </article>
-  );
+  return <article className="general-container_search"></article>;
 }
 export default QuizziesSearch;

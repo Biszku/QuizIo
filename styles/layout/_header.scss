@@ -12,7 +12,8 @@
     &-button {
       transition: all 0.3s;
 
-      @media only screen {
+      @media only screen and (min-width: 56.25em),
+        only screen and (hover: active) {
         &:hover {
           transform: translateY(-0.2rem);
         }
