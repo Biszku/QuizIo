@@ -1,0 +1,29 @@
+.nav {
+  &_list {
+    list-style: none;
+    display: flex;
+    &-item {
+      flex: 1;
+      background-color: #f0e0cc;
+      &_container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem 0.5rem;
+        gap: 0.5rem;
+
+        &_icon {
+          font-size: 1.6rem;
+        }
+        &_text {
+          font-size: 0.8rem;
+          width: max-content;
+        }
+      }
+      &:not(:last-child) {
+        border-right: 0.1rem solid rgba(240, 224, 204, 0.65);
+      }
+    }
+  }
+}

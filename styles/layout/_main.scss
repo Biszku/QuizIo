@@ -1,0 +1,9 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  & > *:not(.footer, #portal, nav) {
+    flex-grow: 1;
+  }
+}
