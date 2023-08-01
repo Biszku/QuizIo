@@ -1,0 +1,11 @@
+.quiz-previe-container {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(78, 78, 78, 0.5),
+      rgba(78, 78, 78, 0.6)
+    ),
+    url(../../public/devOps.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

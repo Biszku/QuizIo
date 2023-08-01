@@ -27,7 +27,7 @@ function MainNav() {
           </Link>
         </li>
         <li className="nav_list-item">
-          <Link href="/user/56" className="nav_list-item_container">
+          <Link href="/user/profile/54" className="nav_list-item_container">
             <ImUser className="nav_list-item_container_icon" />
             <span className="nav_list-item_container_text">Profile</span>
           </Link>
