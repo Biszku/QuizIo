@@ -1,0 +1,9 @@
+.input {
+  color: inherit;
+  font-family: inherit;
+
+  &::placeholder {
+    color: inherit;
+    font-family: inherit;
+  }
+}

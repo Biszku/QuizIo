@@ -5,7 +5,7 @@ function Quizzies() {
   return (
     <>
       <input
-        className="general-container-input"
+        className="general-container-input input"
         type="text"
         placeholder="Enter category of quiz"
       />

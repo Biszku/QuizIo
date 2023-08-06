@@ -1,7 +1,13 @@
 import QuizPrevie from "../../../../components/quiz/quiz-previe/quiz-previe";
 
-function QuizUser({ params }) {
-  console.log(params);
+interface ParamsSlug {
+  params: {
+    category: string;
+    difficulty: string;
+  };
+}
+
+function QuizUser({ params }: ParamsSlug) {
   return <QuizPrevie params={params} />;
 }
 

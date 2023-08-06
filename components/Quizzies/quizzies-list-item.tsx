@@ -1,11 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
 
-function QuizziesListItem({ difficult }) {
+interface PropsData {
+  data: {
+    category: string;
+    difficulty: string;
+  };
+}
+
+function QuizziesListItem({ data }: PropsData) {
   return (
     <li className="general-container_list-container_list-item">
       <Link
-        href={`/quiz/${difficult.category}/${difficult.difficulty}`}
+        href={`/quiz/${data.category}/${data.difficulty}`}
         className="general-container_list-container_list-item_link"
       >
         <span className="general-container_list-container_list-item_link-category">
@@ -19,7 +26,7 @@ function QuizziesListItem({ difficult }) {
           className="general-container_list-container_list-item_link-background"
         />
         <span className="general-container_list-container_list-item_link-difficulty">
-          {difficult.difficulty}
+          {data.difficulty}
         </span>
       </Link>
     </li>
