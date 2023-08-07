@@ -1,4 +1,4 @@
-function Login() {
+const Login = () => {
   return (
     <div className="main-header_login-container">
       <button className="main-header_login-container-button btn">
@@ -9,6 +9,6 @@ function Login() {
       </button>
     </div>
   );
-}
+};
 
 export default Login;

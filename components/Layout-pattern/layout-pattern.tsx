@@ -3,13 +3,14 @@ import Header from "../Header/header";
 import { Poppins } from "@next/font/google";
 import Footer from "../Footer/footer";
 import MainNav from "../Navigation/navigation";
+import { FC } from "react";
 
 const poppins = Poppins({
   subsets: ["devanagari"],
   weight: "400",
 });
 
-function LayoutPattern({ children }: { children: React.ReactNode }) {
+const LayoutPattern: FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <body className={poppins.className}>
       <Header />
@@ -21,6 +22,6 @@ function LayoutPattern({ children }: { children: React.ReactNode }) {
       </main>
     </body>
   );
-}
+};
 
 export default LayoutPattern;

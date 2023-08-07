@@ -1,4 +1,4 @@
-function myQuizzies() {
+const myQuizzies = () => {
   return <h1>My Quizzies</h1>;
 }
 

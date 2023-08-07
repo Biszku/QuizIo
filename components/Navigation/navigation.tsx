@@ -4,7 +4,7 @@ import { ImUser } from "react-icons/im";
 import { ImTrophy } from "react-icons/im";
 import { ImList2 } from "react-icons/im";
 
-function MainNav() {
+const MainNav = () => {
   return (
     <nav className="nav">
       <ul className="nav_list">
@@ -35,6 +35,6 @@ function MainNav() {
       </ul>
     </nav>
   );
-}
+};
 
 export default MainNav;

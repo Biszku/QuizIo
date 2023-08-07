@@ -1,7 +1,7 @@
 import QuizziesSearch from "./quizzies-search";
 import QuizziesList from "./quizzies-list";
 
-function Quizzies() {
+const Quizzies = () => {
   return (
     <>
       <input
@@ -13,5 +13,5 @@ function Quizzies() {
       <QuizziesList />
     </>
   );
-}
+};
 export default Quizzies;

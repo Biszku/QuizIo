@@ -1,7 +1,7 @@
 import Logo from "./logo";
 import Login from "./login";
 
-function Header() {
+const Header = () => {
   return (
     <header className="main-header">
       <Logo />

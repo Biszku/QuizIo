@@ -1,4 +1,5 @@
 import QuizPrevie from "../../../../../components/quiz/quiz-previe/quiz-previe";
+import { FC } from "react";
 
 interface ParamsSlug {
   params: {
@@ -7,8 +8,8 @@ interface ParamsSlug {
   };
 }
 
-function QuizUser({ params }: ParamsSlug) {
+const QuizUser: FC<ParamsSlug> = ({ params }) => {
   return <QuizPrevie params={params} />;
-}
+};
 
 export default QuizUser;

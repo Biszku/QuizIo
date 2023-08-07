@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FC } from "react";
 import { HiChevronRight } from "react-icons/hi";
 
 interface ParamsSlug {
@@ -8,7 +9,7 @@ interface ParamsSlug {
   };
 }
 
-function QuizPrevie({ params }: ParamsSlug) {
+const QuizPrevie: FC<ParamsSlug> = ({ params }) => {
   let timeToAnswer = 0;
   switch (params.difficulty) {
     case "easy":
@@ -68,6 +69,6 @@ function QuizPrevie({ params }: ParamsSlug) {
       </div>
     </section>
   );
-}
+};
 
 export default QuizPrevie;

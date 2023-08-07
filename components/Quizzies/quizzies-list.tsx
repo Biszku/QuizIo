@@ -6,7 +6,7 @@ interface RandomQuizziesPattern {
   difficulty: string;
 }
 
-function QuizziesList() {
+const QuizziesList = () => {
   const RandomQuizzies: RandomQuizziesPattern[] = [
     { id: 1, category: "random", difficulty: "easy" },
     { id: 2, category: "random", difficulty: "medium" },

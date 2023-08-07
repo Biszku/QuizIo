@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { FC } from "react";
 
 interface PropsData {
   data: {
@@ -8,7 +9,7 @@ interface PropsData {
   };
 }
 
-function QuizziesListItem({ data }: PropsData) {
+const QuizziesListItem: FC<PropsData> = ({ data }) => {
   return (
     <li className="general-container_list-container_list-item">
       <Link
@@ -31,6 +32,6 @@ function QuizziesListItem({ data }: PropsData) {
       </Link>
     </li>
   );
-}
+};
 
 export default QuizziesListItem;
