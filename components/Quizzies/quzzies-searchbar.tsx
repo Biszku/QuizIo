@@ -1,7 +1,7 @@
 "use client";
 
+import GetQuzzies from "../../utils/getQuzzies";
 import { useEffect, useState } from "react";
-import useGetQuzzies from "@/hooks/useGetQuzzies";
 
 const QuizziesSearchBar = () => {
   const arrOfDifficulty = ["easy", "medium", "hard"];
@@ -9,7 +9,11 @@ const QuizziesSearchBar = () => {
 
   useEffect(() => {
     if (categoryOfQuiz !== "") {
-      console.log(useGetQuzzies(categoryOfQuiz, arrOfDifficulty));
+      const getQuiz = async () => {
+        const data = await GetQuzzies(categoryOfQuiz);
+        console.log(data);
+      };
+      getQuiz();
     }
   }, [categoryOfQuiz]);
 
