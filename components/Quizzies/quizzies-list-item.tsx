@@ -20,8 +20,8 @@ function QuizziesListItem({ data }: PropsData) {
         </span>
         <Image
           src="/random.jpg"
-          width={400}
-          height={400}
+          width={300}
+          height={300}
           alt="A lot of books and some pictures"
           className="general-container_list-container_list-item_link-background"
         />
