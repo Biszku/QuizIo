@@ -2,4 +2,61 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+
+  display: grid;
+  place-items: center;
+
+  &_content {
+    height: 80%;
+    width: 80%;
+    border-radius: 1rem;
+    background-color: rgba(240, 224, 204, 0.3);
+    backdrop-filter: blur(0.1rem);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    padding: 1rem;
+
+    &-category {
+      font-size: 2.4rem;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    &-list {
+      list-style: none;
+      display: flex;
+      align-self: flex-start;
+      flex-direction: column;
+      gap: 0.2rem;
+      &-item {
+        display: flex;
+        align-items: center;
+
+        &-icon {
+          fill: #ad5e13;
+          font-size: 2.2rem;
+        }
+
+        &-prop {
+          font-size: 0.8rem;
+          font-weight: 600;
+          text-transform: capitalize;
+        }
+
+        &-param {
+          font-size: 1rem;
+          font-weight: 700;
+          margin-left: 0.4rem;
+        }
+      }
+    }
+
+    &-button {
+      background-color: #ff922b;
+    }
+  }
 }
