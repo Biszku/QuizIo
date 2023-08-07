@@ -56,7 +56,7 @@ const QuizPrevie: FC<ParamsSlug> = ({ params }) => {
               number of questions:
             </span>
             <span className="quiz-previe-container_content-list-item-param">
-              50
+              20
             </span>
           </li>
         </ul>
