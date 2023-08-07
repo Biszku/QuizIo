@@ -1,14 +1,11 @@
-import QuizziesSearch from "./quizzies-search";
+import QuizziesSearch from "./quizzies-search-output";
 import QuizziesList from "./quizzies-list";
+import QuizziesSearchBar from "./quzzies-searchbar";
 
 const Quizzies = () => {
   return (
     <>
-      <input
-        className="general-container-input input"
-        type="text"
-        placeholder="Enter category of quiz"
-      />
+      <QuizziesSearchBar />
       <QuizziesSearch />
       <QuizziesList />
     </>
