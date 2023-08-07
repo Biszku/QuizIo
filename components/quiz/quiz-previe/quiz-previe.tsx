@@ -22,7 +22,7 @@ function QuizPrevie({ params }: ParamsSlug) {
           <li>{`Time to answer: ${10} sec`}</li>
           <li>number of questions: 40</li>
         </ul>
-        <Link href={`/quiz/${params.category}/${params.difficulty}/1`}>
+        <Link href={`/quiz/${params.category}/${params.difficulty}`}>
           Start Quiz
         </Link>
       </div>

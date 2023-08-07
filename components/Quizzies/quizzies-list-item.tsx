@@ -12,7 +12,7 @@ function QuizziesListItem({ data }: PropsData) {
   return (
     <li className="general-container_list-container_list-item">
       <Link
-        href={`/quiz/${data.category}/${data.difficulty}`}
+        href={`/quiz/previe/${data.category}/${data.difficulty}`}
         className="general-container_list-container_list-item_link"
       >
         <span className="general-container_list-container_list-item_link-category">
