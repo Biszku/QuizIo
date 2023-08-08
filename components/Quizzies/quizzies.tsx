@@ -1,11 +1,11 @@
 import QuizziesSearch from "./quizzies-search-output";
 import QuizziesList from "./quizzies-list";
-import QuizziesSearchBar from "./quzzies-searchbar";
+import QuizziesSelecting from "./quzzies-selecting";
 
 const Quizzies = () => {
   return (
     <>
-      <QuizziesSearchBar />
+      <QuizziesSelecting />
       <QuizziesSearch />
       <QuizziesList />
     </>
