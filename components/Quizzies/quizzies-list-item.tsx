@@ -21,7 +21,7 @@ const QuizziesListItem: FC<PropsData> = ({ data }) => {
         </span>
         <Image
           src="/random.jpg"
-          width={300}
+          width={400}
           height={300}
           alt="A lot of books and some pictures"
           className="general-container_list-container_list-item_link-background"
