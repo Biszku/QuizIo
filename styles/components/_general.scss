@@ -4,35 +4,58 @@
   background-color: rgba(240, 224, 204, 0.5);
 
   &_selecting-container {
-    padding: 1.1rem 1rem;
+    padding: 0.4rem 1rem;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+    &_loc {
+      overflow-y: auto;
+      max-height: 19rem;
 
-    &-checkbox {
-      display: none;
+      &-item {
+        margin-bottom: 1rem;
+        display: grid;
+        padding: 1rem;
+        place-items: center;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        display: none;
+
+        &-category {
+          font-size: 1.6rem;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+      }
     }
 
-    &-checkbox:checked ~ &-label {
-      animation-name: rotateToDown;
-      animation-duration: 0.4s;
-      transform: rotate(-180deg);
-    }
+    &_select-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      &-checkbox {
+        display: none;
+      }
 
-    &-label {
-      display: grid;
-      place-items: center;
-      transition: all 0.3s;
-    }
+      &-checkbox:checked ~ &-label {
+        animation-name: rotateToDown;
+        animation-duration: 0.4s;
+        transform: rotate(-180deg);
+      }
 
-    &-select-text {
-      font-size: 1.2rem;
-    }
+      &-label {
+        display: grid;
+        place-items: center;
+        transition: all 0.3s;
+      }
 
-    &-show-icon {
-      font-size: 2.2rem;
-      transform: rotate(180deg);
+      &-select-text {
+        font-size: 1.2rem;
+      }
+
+      &-show-icon {
+        font-size: 2.2rem;
+        transform: rotate(180deg);
+      }
     }
   }
 
@@ -81,6 +104,10 @@
       }
     }
   }
+}
+
+.isVisible {
+  display: grid;
 }
 
 @keyframes rotateToDown {
