@@ -1,6 +1,7 @@
 "use client";
 import { HiChevronDown } from "react-icons/hi";
 import { useState } from "react";
+import QuizziesSelectingCategory from "./quzzies-selecting-category";
 
 const QuizziesSelecting = () => {
   const [visible, setVisible] = useState<boolean>(false);
@@ -36,17 +37,12 @@ const QuizziesSelecting = () => {
       </div>
       <div className="general-container_selecting-container_loc">
         {arrOfCategories.map((category, index) => (
-          <div
+          <QuizziesSelectingCategory
             key={index}
-            className={`general-container_selecting-container_loc-item ${
-              visible ? "isVisible" : ""
-            }`}
-            style={{
-              backgroundImage: `url(/${category}.jpg)`,
-            }}
-          >
-            <span className="general-container_selecting-container_loc-item-category">{`${category}`}</span>
-          </div>
+            category={category}
+            delay={index}
+            visibility={visible}
+          />
         ))}
       </div>
     </article>
