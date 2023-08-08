@@ -12,13 +12,15 @@
 
       &-item {
         margin-bottom: 1rem;
-        display: grid;
+        border-radius: 0.4rem;
         padding: 1rem;
         place-items: center;
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
         display: none;
+
+        animation: Slide 1s forwards;
 
         &-category {
           font-size: 1.6rem;
@@ -107,6 +109,7 @@
 }
 
 .isVisible {
+  opacity: 0;
   display: grid;
 }
 
@@ -119,5 +122,17 @@
   }
   100% {
     transform: rotate(-180deg);
+  }
+}
+
+@keyframes Slide {
+  0% {
+    opacity: 0;
+
+    transform: translateX(-30rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0rem);
   }
 }
