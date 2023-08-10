@@ -1,14 +1,18 @@
+"use client";
+import { useContext } from "react";
+import { MainContext } from "../../context/context";
+
 const QuizziesSelectingCategory = ({
   category,
   delay,
   visibility,
-  turnOffCategories,
 }: {
   category: string;
   delay: number;
   visibility: boolean;
-  turnOffCategories: () => void;
 }) => {
+  const { changeVisibility } = useContext(MainContext);
+
   const input = document.querySelector("#showCategories")! as HTMLInputElement;
 
   return (
@@ -22,7 +26,7 @@ const QuizziesSelectingCategory = ({
       }}
       onClick={() => {
         input.checked = false;
-        turnOffCategories();
+        changeVisibility();
       }}
     >
       <span className="general-container_selecting-container_loc-item-category">{`${category}`}</span>

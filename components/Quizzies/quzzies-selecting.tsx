@@ -1,19 +1,11 @@
 "use client";
 import { HiChevronDown } from "react-icons/hi";
-import { useState } from "react";
-import QuizziesSelectingCategory from "./quzzies-selecting-category";
+import { useContext } from "react";
+import { MainContext } from "../../context/context";
 
 const QuizziesSelecting = () => {
-  const [visible, setVisible] = useState<boolean>(false);
-  const arrOfCategories = [
-    "linux",
-    "devOps",
-    "networking",
-    "programming",
-    "cloud",
-    "docker",
-    "kubernetes",
-  ];
+  const { changeVisibility } = useContext(MainContext);
+
   return (
     <article className="general-container_selecting-container">
       <div className="general-container_selecting-container_select-bar">
@@ -31,19 +23,11 @@ const QuizziesSelecting = () => {
         >
           <HiChevronDown
             className="general-container_selecting-container_select-bar-show-icon"
-            onClick={() => setVisible((prev) => !prev)}
+            onClick={() => {
+              changeVisibility();
+            }}
           />
         </label>
-      </div>
-      <div className="general-container_selecting-container_loc">
-        {arrOfCategories.map((category, index) => (
-          <QuizziesSelectingCategory
-            key={index}
-            category={category}
-            delay={index}
-            visibility={visible}
-          />
-        ))}
       </div>
     </article>
   );
