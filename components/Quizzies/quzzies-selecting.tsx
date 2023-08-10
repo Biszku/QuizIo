@@ -1,10 +1,18 @@
 "use client";
 import { HiChevronDown } from "react-icons/hi";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { MainContext } from "../../context/context";
 
 const QuizziesSelecting = () => {
-  const { changeVisibility } = useContext(MainContext);
+  const { changeVisibility, visibilityOfCategoryList } =
+    useContext(MainContext);
+  const checkboxRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (visibilityOfCategoryList === false) {
+      if (checkboxRef.current !== null) checkboxRef.current.checked = false;
+    }
+  }, [visibilityOfCategoryList]);
 
   return (
     <article className="general-container_selecting-container">
@@ -14,6 +22,7 @@ const QuizziesSelecting = () => {
         </span>
         <input
           type="checkbox"
+          ref={checkboxRef}
           id="showCategories"
           className="general-container_selecting-container_select-bar-checkbox"
         />

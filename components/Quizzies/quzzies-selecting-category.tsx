@@ -13,8 +13,6 @@ const QuizziesSelectingCategory = ({
 }) => {
   const { changeVisibility } = useContext(MainContext);
 
-  const input = document.querySelector("#showCategories")! as HTMLInputElement;
-
   return (
     <div
       className={`general-container_selecting-container_loc-item ${
@@ -25,7 +23,6 @@ const QuizziesSelectingCategory = ({
         animationDelay: `${0.05 * delay}s`,
       }}
       onClick={() => {
-        input.checked = false;
         changeVisibility();
       }}
     >
