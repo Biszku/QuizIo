@@ -1,18 +1,10 @@
 "use client";
 import { HiChevronDown } from "react-icons/hi";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useRef } from "react";
 import { MainContext } from "../../context/context";
 
 const QuizziesSelecting = () => {
-  const { changeVisibility, visibilityOfCategoryList } =
-    useContext(MainContext);
-  const checkboxRef = useRef<HTMLInputElement | null>(null);
-
-  useEffect(() => {
-    if (visibilityOfCategoryList === false) {
-      if (checkboxRef.current !== null) checkboxRef.current.checked = false;
-    }
-  }, [visibilityOfCategoryList]);
+  const { changeVisibility, checkboxRef } = useContext(MainContext);
 
   return (
     <article className="general-container_selecting-container">

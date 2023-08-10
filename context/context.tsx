@@ -1,8 +1,9 @@
 "use client";
-import React, { createContext, useState, FC } from "react";
+import React, { createContext, useState, FC, useRef } from "react";
 
 interface MainContextData {
   quiz: object;
+  checkboxRef: any;
   visibilityOfCategoryList: boolean;
   addQuiz: (quiz: object) => void;
   deleteQuiz: () => void;
@@ -11,6 +12,7 @@ interface MainContextData {
 
 export const MainContext = createContext<MainContextData>({
   quiz: {},
+  checkboxRef: null,
   visibilityOfCategoryList: false,
   changeVisibility: () => {},
   addQuiz: () => {},
@@ -23,7 +25,8 @@ const MainContextProvider: FC<{ children: React.ReactNode }> = ({
   const [quiz, setQuiz] = useState<object>({});
   const [visibilityOfCategoryList, setVisibilityOfCategoryList] =
     useState<boolean>(false);
-  console.log(visibilityOfCategoryList);
+
+  const checkboxRef = useRef<HTMLInputElement | null>(null);
 
   const changeVisibility = () => setVisibilityOfCategoryList((prev) => !prev);
 
@@ -35,6 +38,7 @@ const MainContextProvider: FC<{ children: React.ReactNode }> = ({
     <MainContext.Provider
       value={{
         quiz,
+        checkboxRef,
         visibilityOfCategoryList,
         changeVisibility,
         addQuiz,
