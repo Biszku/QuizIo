@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FC } from "react";
 import { HiChevronRight } from "react-icons/hi";
+import Image from "next/image";
 
 interface ParamsSlug {
   params: {
@@ -26,9 +27,16 @@ const QuizPrevie: FC<ParamsSlug> = ({ params }) => {
     <section
       className="quiz-previe-container"
       style={{
-        backgroundImage: ` linear-gradient(to right bottom, rgba(200, 200, 200, .3), rgba(200, 200, 200, .4)), url(/${params.category}.jpg)`,
+        backgroundImage: ` linear-gradient(to right bottom, rgba(200, 200, 200, .3), rgba(200, 200, 200, .4))`,
       }}
     >
+      <Image
+        src={`/${params.category}.jpg`}
+        width={300}
+        height={400}
+        className="quiz-previe-container-background"
+        alt={params.category}
+      ></Image>
       <div className="quiz-previe-container_content">
         <p className="quiz-previe-container_content-category">
           {params.category}
