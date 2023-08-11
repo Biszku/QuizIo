@@ -4,6 +4,8 @@ import React, { createContext, useState, FC, useRef } from "react";
 interface MainContextData {
   quiz: object;
   checkboxRef: any;
+  currentCategory: string[];
+  setCurCat: (category: string) => void;
   visibilityOfCategoryList: boolean;
   addQuiz: (quiz: object) => void;
   deleteQuiz: () => void;
@@ -13,7 +15,9 @@ interface MainContextData {
 export const MainContext = createContext<MainContextData>({
   quiz: {},
   checkboxRef: null,
+  currentCategory: [""],
   visibilityOfCategoryList: false,
+  setCurCat: () => {},
   changeVisibility: () => {},
   addQuiz: () => {},
   deleteQuiz: () => {},
@@ -25,6 +29,9 @@ const MainContextProvider: FC<{ children: React.ReactNode }> = ({
   const [quiz, setQuiz] = useState<object>({});
   const [visibilityOfCategoryList, setVisibilityOfCategoryList] =
     useState<boolean>(false);
+  const [currentCategory, setCurrentCategory] = useState<string[]>([""]);
+
+  const setCurCat = (category: string) => setCurrentCategory([category]);
 
   const checkboxRef = useRef<HTMLInputElement | null>(null);
 
@@ -38,6 +45,8 @@ const MainContextProvider: FC<{ children: React.ReactNode }> = ({
     <MainContext.Provider
       value={{
         quiz,
+        currentCategory,
+        setCurCat,
         checkboxRef,
         visibilityOfCategoryList,
         changeVisibility,
