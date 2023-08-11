@@ -19,7 +19,7 @@ const QuizziesSearchOutputItem: FC<DataFromProps> = ({
         <div
           className="general-container_search-item_link-background"
           style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.23)),url(/${category}.jpg)`,
+            backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.23)),url(/mini-${category}.jpg)`,
           }}
         ></div>
         <span className="general-container_search-item_link-category">
