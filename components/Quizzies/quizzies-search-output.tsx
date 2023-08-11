@@ -1,5 +1,6 @@
 "use client";
 import QuizziesSelectingCategory from "./quzzies-selecting-category";
+import QuizziesSearchOutputItem from "./quizzies-search-output-item";
 import { useContext } from "react";
 import { MainContext } from "../../context/context";
 
@@ -13,10 +14,40 @@ const QuizziesSearchOutput = () => {
     "docker",
     "kubernetes",
   ];
-  const { visibilityOfCategoryList } = useContext(MainContext);
+
+  const { visibilityOfCategoryList, currentCategory } = useContext(MainContext);
+  console.log(currentCategory);
+
+  const dataToRenderQuizzies = [
+    {
+      id: "0",
+      category: currentCategory,
+      difficult: "easy",
+    },
+    {
+      id: "1",
+      category: currentCategory,
+      difficult: "medium",
+    },
+    { id: "2", category: currentCategory, difficult: "hard" },
+  ];
+
   return (
     <article className="general-container_search">
-      <div className="general-container_selecting-container_loc">
+      {dataToRenderQuizzies[0].category[0] !== "" &&
+        dataToRenderQuizzies.map((el) => (
+          <QuizziesSearchOutputItem
+            key={el.id}
+            category={el.category[0]}
+            difficult={el.difficult}
+          />
+        ))}
+
+      <div
+        className={`general-container_selecting-container_loc ${
+          visibilityOfCategoryList === true ? "isVisibleContainer" : ""
+        }`}
+      >
         {arrOfCategories.map((category, index) => (
           <QuizziesSelectingCategory
             key={index}
