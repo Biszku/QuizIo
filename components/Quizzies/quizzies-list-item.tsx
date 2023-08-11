@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { FC } from "react";
 
 interface PropsData {
@@ -19,13 +18,6 @@ const QuizziesListItem: FC<PropsData> = ({ data }) => {
         <span className="general-container_list-container_list-item_link-category">
           Random
         </span>
-        {/* <Image
-          src="/random.jpg"
-          width={400}
-          height={300}
-          alt="A lot of books and some pictures"
-          className="general-container_list-container_list-item_link-background"
-        /> */}
         <div className="general-container_list-container_list-item_link-background"></div>
         <span className="general-container_list-container_list-item_link-difficulty">
           {data.difficulty}
