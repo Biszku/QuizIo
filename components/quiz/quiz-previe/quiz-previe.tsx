@@ -1,4 +1,3 @@
-"use client";
 import Link from "next/link";
 import { FC } from "react";
 import { HiChevronRight } from "react-icons/hi";
