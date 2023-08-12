@@ -16,7 +16,6 @@ const QuizziesSearchOutput = () => {
   ];
 
   const { visibilityOfCategoryList, currentCategory } = useContext(MainContext);
-  console.log(currentCategory);
 
   const dataToRenderQuizzies = [
     {
