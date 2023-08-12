@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { FC } from "react";
 import { HiChevronRight } from "react-icons/hi";
-import Image from "next/image";
 
 interface ParamsSlug {
   params: {
