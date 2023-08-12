@@ -1,6 +1,6 @@
 "use client";
 import { HiChevronDown } from "react-icons/hi";
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import { MainContext } from "../../context/context";
 
 const QuizziesSelecting = () => {
