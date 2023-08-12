@@ -1,0 +1,11 @@
+.quiz_container {
+  display: grid;
+  place-items: center;
+  position: relative;
+
+  &_single-quiz {
+    position: absolute;
+    height: 80%;
+    width: 80%;
+  }
+}
