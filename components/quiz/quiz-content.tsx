@@ -1,15 +1,21 @@
+import GetQuzzies from "../../utils/getQuzzies";
 import { FC } from "react";
 
-interface dataProps {
-  data: any[];
+interface parametersProps {
+  parameters: {
+    quiz: string[];
+  };
 }
 
-const QuizContent: FC<dataProps> = ({ data }) => {
-  console.log(data);
+const QuizContent: FC<parametersProps> = async ({ parameters }) => {
+  const [category, difficult] = parameters.quiz;
+  const quiz = await GetQuzzies(category, difficult);
+  
+  console.log(1, quiz);
   return (
     <section className="quiz_container">
-      {data.map((el) => {
-        return <div className="quiz_container_single-quiz"></div>;
+      {quiz.map((el: any) => {
+        return <div className="quiz_container_single-quiz">{el.id}</div>;
       })}
     </section>
   );

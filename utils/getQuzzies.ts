@@ -4,7 +4,11 @@ const GetQuzzies = async (
   limit: string = "20"
 ) => {
   const req = await fetch(
-    `https://quizapi.io/api/v1/questions?apiKey=${process.env.NEXT_PUBLIC_API_KEY}&category=${category}&difficulty=${difficulty}&limit=${limit}`
+    `https://quizapi.io/api/v1/questions?apiKey=${
+      process.env.NEXT_PUBLIC_API_KEY
+    }&category=${
+      category === "random" ? "" : category
+    }&difficulty=${difficulty}&limit=${limit}`
   );
   const res = await req.json();
   return res;

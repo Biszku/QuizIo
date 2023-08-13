@@ -1,6 +1,5 @@
-import GetQuzzies from "../../../utils/getQuzzies";
-import { FC } from "react";
 import QuizContent from "../../../components/quiz/quiz-content";
+import { FC } from "react";
 
 interface ParamsSlug {
   params: {
@@ -8,10 +7,8 @@ interface ParamsSlug {
   };
 }
 
-const Quiz: FC<ParamsSlug> = async ({ params }) => {
-  const [category, difficult] = params.quiz;
-  const quiz = await GetQuzzies(category, difficult);
-  return <QuizContent data={quiz} />;
+const Quiz: FC<ParamsSlug> = ({ params }) => {
+  return <QuizContent parameters={params} />;
 };
 
 export default Quiz;
