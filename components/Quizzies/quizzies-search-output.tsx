@@ -5,15 +5,7 @@ import { useContext } from "react";
 import { MainContext } from "../../context/context";
 
 const QuizziesSearchOutput = () => {
-  const arrOfCategories = [
-    "linux",
-    "devOps",
-    "networking",
-    "programming",
-    "cloud",
-    "docker",
-    "kubernetes",
-  ];
+  const arrOfCategories = ["linux", "devOps", "sql", "code", "cms", "docker"];
 
   const { visibilityOfCategoryList, currentCategory } = useContext(MainContext);
 
