@@ -1,11 +1,47 @@
 .quiz_container {
   display: grid;
   place-items: center;
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(237, 242, 255, 1),
+    rgba(219, 228, 255, 1)
+  );
   position: relative;
 
   &_single-quiz {
+    height: 90%;
+    width: 90%;
+    background-color: rgb(247, 236, 223);
+    padding: 0.5rem;
+    border: 0.1rem solid rgb(240, 224, 204, 1);
+    border-radius: 0.5rem;
+
     position: absolute;
-    height: 80%;
-    width: 80%;
+    z-index: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    &_question-box {
+      background-color: white;
+      display: grid;
+      place-items: center;
+
+      &--question {
+        text-align: center;
+        font-size: 0.9rem;
+        font-weight: bold;
+        animation: appearQuiz 1s;
+      }
+    }
+  }
+}
+
+@keyframes appearQuiz {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
