@@ -83,6 +83,10 @@
     &-item {
       flex: 1;
 
+      &:first-child {
+        margin-top: 0.1rem;
+      }
+
       &_link {
         display: grid;
         border-radius: 0.5rem 0.5rem 0rem 0rem;
