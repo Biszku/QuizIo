@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FC } from "react";
 import { HiChevronRight } from "react-icons/hi";
+import GetQuzzies from "@/utils/getQuzzies";
 
 interface ParamsSlug {
   params: {
@@ -9,7 +10,9 @@ interface ParamsSlug {
   };
 }
 
-const QuizPrevie: FC<ParamsSlug> = ({ params }) => {
+const QuizPrevie: FC<ParamsSlug> = async ({ params }) => {
+  const { category, difficulty } = params;
+  const numOfQuestions = await GetQuzzies(category, difficulty);
   let timeToAnswer = 0;
   switch (params.difficulty) {
     case "easy":
@@ -63,7 +66,7 @@ const QuizPrevie: FC<ParamsSlug> = ({ params }) => {
               number of questions:
             </span>
             <span className="quiz-previe-container_content-list-item-param">
-              20
+              {numOfQuestions.length === 0 ? "0" : numOfQuestions.length}
             </span>
           </li>
         </ul>
