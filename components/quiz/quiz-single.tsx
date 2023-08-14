@@ -7,7 +7,7 @@ interface ArrOfQuizziesProp {
 
 const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies }) => {
   const [quizzies, setQuizzies] = useState(arrOfQuizzies);
-  const [numOfcurQuiz, setNumOfcurQuiz] = useState(1);
+  const [numOfcurQuiz, setNumOfcurQuiz] = useState(0);
   const arrOfAnswers = [];
 
   for (const aliasToAnswer in quizzies[numOfcurQuiz]?.answers) {
@@ -21,6 +21,11 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies }) => {
           key={quizzies[numOfcurQuiz].id}
           className="quiz_container_single-quiz"
         >
+          <div className="quiz_container_single-quiz_info-box">
+            <span>
+              {numOfcurQuiz + 1} / {quizzies.length}
+            </span>
+          </div>
           <div className="quiz_container_single-quiz_question-box">
             <span className="quiz_container_single-quiz_question-box--question">
               {quizzies[numOfcurQuiz].question}
@@ -36,7 +41,7 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies }) => {
                     className="quiz_container_single-quiz_answers-box_answer"
                   >
                     <button
-                      className="btn"
+                      className="quiz_container_single-quiz_answers-box_answer-btn btn"
                       onClick={() => setNumOfcurQuiz((prev: any) => prev + 1)}
                     >
                       {value}
@@ -45,7 +50,6 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies }) => {
                 );
               })}
           </div>
-          <span>-{quizzies[numOfcurQuiz].category}-</span>
         </article>
       )}
       {numOfcurQuiz === 20 && (
