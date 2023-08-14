@@ -8,10 +8,29 @@ interface ArrOfQuizziesProp {
 const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies }) => {
   const [quizzies, setQuizzies] = useState(arrOfQuizzies);
   const [numOfcurQuiz, setNumOfcurQuiz] = useState(0);
+  const [gameInfo, setGameInfo] = useState({
+    points: 0,
+  });
   const arrOfAnswers = [];
+  const correctAnswer: any[] = [];
+
+  const chooseAnswer = (answer: any) => {
+    if (correctAnswer[0] === answer) {
+      setGameInfo((prev) => ({ ...prev, points: prev.points + 1 }));
+    }
+    setNumOfcurQuiz((prev) => prev + 1);
+  };
 
   for (const aliasToAnswer in quizzies[numOfcurQuiz]?.answers) {
-    arrOfAnswers.push(quizzies[numOfcurQuiz]?.answers[aliasToAnswer]);
+    arrOfAnswers.push({
+      answer: aliasToAnswer,
+      value: quizzies[numOfcurQuiz]?.answers[aliasToAnswer],
+    });
+  }
+
+  for (const answerObj in quizzies[numOfcurQuiz]?.correct_answers) {
+    if (quizzies[numOfcurQuiz].correct_answers[answerObj] === "true")
+      correctAnswer.push(answerObj.slice(0, 8));
   }
 
   return (
@@ -33,8 +52,8 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies }) => {
           </div>
           <div className="quiz_container_single-quiz_answers-box">
             {arrOfAnswers
-              .filter((val) => val !== null)
-              .map((value, index) => {
+              .filter((el) => el.value !== null)
+              .map((el, index) => {
                 return (
                   <div
                     key={index}
@@ -42,9 +61,9 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies }) => {
                   >
                     <button
                       className="quiz_container_single-quiz_answers-box_answer-btn btn"
-                      onClick={() => setNumOfcurQuiz((prev: any) => prev + 1)}
+                      onClick={() => chooseAnswer(el.answer)}
                     >
-                      {value}
+                      {el.value}
                     </button>
                   </div>
                 );
@@ -54,7 +73,9 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies }) => {
       )}
       {numOfcurQuiz === 20 && (
         <article className="quiz_container_quiz-summary">
-          <span>Congratulation</span>
+          <span>
+            You scored {gameInfo.points}/{quizzies.length}
+          </span>
         </article>
       )}
     </>
