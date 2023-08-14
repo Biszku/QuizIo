@@ -29,7 +29,7 @@ const QuizPrevie: FC<ParamsSlug> = async ({ params }) => {
     <section
       className="quiz-previe-container"
       style={{
-        backgroundImage: ` linear-gradient(to right bottom, rgba(200, 200, 200, .3), rgba(200, 200, 200, .4)),url(/${params.category}.jpg)`,
+        backgroundImage: ` linear-gradient(to right bottom, rgba(200, 200, 200, .3), rgba(200, 200, 200, .4)),url(/mini-${params.category}.jpg)`,
       }}
     >
       {/* <Image

@@ -6,9 +6,9 @@ interface ArrOfQuizziesProp {
 }
 
 const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies }) => {
-  const [quizzies, setQuizzies] = useState<any[]>(arrOfQuizzies);
-  const [numOfcurQuiz, setNumOfcurQuiz] = useState<any>(1);
-  const arrOfAnswers: string[] = [];
+  const [quizzies, setQuizzies] = useState(arrOfQuizzies);
+  const [numOfcurQuiz, setNumOfcurQuiz] = useState(1);
+  const arrOfAnswers = [];
 
   for (const aliasToAnswer in quizzies[numOfcurQuiz]?.answers) {
     arrOfAnswers.push(quizzies[numOfcurQuiz]?.answers[aliasToAnswer]);
