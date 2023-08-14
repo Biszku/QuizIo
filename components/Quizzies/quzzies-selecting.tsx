@@ -9,9 +9,18 @@ const QuizziesSelecting = () => {
   return (
     <article className="general-container_selecting-container">
       <div className="general-container_selecting-container_select-bar">
-        <span className="general-container_selecting-container_select-bar-select-text">
+        <label
+          htmlFor="showCategories"
+          className="general-container_selecting-container_select-bar-select-text"
+          style={{
+            userSelect: "none",
+          }}
+          onClick={() => {
+            changeVisibility();
+          }}
+        >
           Select Category Of Quiz
-        </span>
+        </label>
         <input
           type="checkbox"
           ref={checkboxRef}
