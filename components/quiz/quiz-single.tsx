@@ -1,12 +1,28 @@
 "use client";
-import { useState, FC } from "react";
+import { useState, FC, useEffect } from "react";
+import { useContext } from "react";
+import { MainContext } from "../../context/context";
 
 interface ArrOfQuizziesProp {
   arrOfQuizzies: any[];
+  info: {
+    category: string;
+    difficult: string;
+  };
+  questionfromContinue?: any[];
 }
 
-const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies }) => {
+const SingleQuiz: FC<ArrOfQuizziesProp> = ({
+  arrOfQuizzies,
+  info,
+  questionfromContinue,
+}) => {
+  const { addQuiz, quizzes } = useContext(MainContext);
+
   const [quizzies, setQuizzies] = useState(arrOfQuizzies);
+
+  if (questionfromContinue) setQuizzies(questionfromContinue);
+
   const [numOfcurQuiz, setNumOfcurQuiz] = useState(0);
   const [gameInfo, setGameInfo] = useState({
     points: 0,
@@ -34,6 +50,15 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies }) => {
     if (quizzies[numOfcurQuiz].correct_answers[answerObj] === "true")
       correctAnswer.push(answerObj.slice(0, 8));
   }
+
+  useEffect(() => {
+    addQuiz({
+      category: info.category,
+      difficulty: info.difficult,
+      questions: quizzies.slice(numOfcurQuiz, quizzies.length),
+      status: "unfinished",
+    });
+  }, [numOfcurQuiz]);
 
   return (
     <>
