@@ -15,9 +15,11 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies }) => {
   const correctAnswer: any[] = [];
 
   const chooseAnswer = (answer: any) => {
-    if (correctAnswer[0] === answer) {
+    if (chooseAnswer.length === 0 && answer === "none")
       setGameInfo((prev) => ({ ...prev, points: prev.points + 1 }));
-    }
+    if (correctAnswer.includes(answer))
+      setGameInfo((prev) => ({ ...prev, points: prev.points + 1 }));
+
     setNumOfcurQuiz((prev) => prev + 1);
   };
 
@@ -68,6 +70,14 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies }) => {
                   </div>
                 );
               })}
+            <div className="quiz_container_single-quiz_answers-box_answer">
+              <button
+                className="quiz_container_single-quiz_answers-box_answer-btn btn"
+                onClick={() => chooseAnswer("none")}
+              >
+                none
+              </button>
+            </div>
           </div>
         </article>
       )}
