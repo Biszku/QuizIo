@@ -2,31 +2,48 @@
 import React, { createContext, useState, FC, useRef } from "react";
 
 interface MainContextData {
-  quiz: object;
+  quizzes:
+    | {
+        category: string;
+        difficulty: string;
+        status: string;
+        questions?: any[];
+      }[]
+    | [];
   checkboxRef: any;
   currentCategory: string[];
-  setCurCat: (category: string) => void;
   visibilityOfCategoryList: boolean;
-  addQuiz: (quiz: object) => void;
-  deleteQuiz: () => void;
+  setCurCat: (category: string) => void;
   changeVisibility: () => void;
+  addQuiz: (quiz: {
+    category: string;
+    difficulty: string;
+    status: string;
+    questions?: any[];
+  }) => void;
 }
 
 export const MainContext = createContext<MainContextData>({
-  quiz: {},
+  quizzes: [],
   checkboxRef: null,
   currentCategory: [""],
   visibilityOfCategoryList: false,
   setCurCat: () => {},
   changeVisibility: () => {},
   addQuiz: () => {},
-  deleteQuiz: () => {},
 });
 
 const MainContextProvider: FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [quiz, setQuiz] = useState<object>({});
+  const [quizzes, setQuizzes] = useState<
+    {
+      category: string;
+      difficulty: string;
+      status: string;
+      questions?: any[];
+    }[]
+  >([]);
   const [visibilityOfCategoryList, setVisibilityOfCategoryList] =
     useState<boolean>(false);
   const [currentCategory, setCurrentCategory] = useState<string[]>([""]);
@@ -37,21 +54,34 @@ const MainContextProvider: FC<{ children: React.ReactNode }> = ({
 
   const changeVisibility = () => setVisibilityOfCategoryList((prev) => !prev);
 
-  const addQuiz = (quiz: object) => setQuiz(quiz);
-
-  const deleteQuiz = () => setQuiz({});
+  const addQuiz = (quiz: {
+    category: string;
+    difficulty: string;
+    status: string;
+    questions?: any[];
+  }) =>
+    setQuizzes((prev) => {
+      // if (
+      //   prev.includes({
+      //     category: quiz.category,
+      //     difficulty: quiz.difficulty,
+      //     status: quiz.status,
+      //   })
+      // )
+      //   return prev;
+      return [quiz, ...prev];
+    });
 
   return (
     <MainContext.Provider
       value={{
-        quiz,
+        quizzes,
         currentCategory,
         setCurCat,
         checkboxRef,
         visibilityOfCategoryList,
         changeVisibility,
         addQuiz,
-        deleteQuiz,
       }}
     >
       {children}
