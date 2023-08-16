@@ -13,7 +13,7 @@ const QuizContent: FC<parametersProps> = async ({ parameters }) => {
   const quiz = await GetQuzzies(category, difficult);
   return (
     <section className="quiz_container">
-      <SingleQuiz arrOfQuizzies={quiz} />
+      <SingleQuiz arrOfQuizzies={quiz} info={{ category, difficult }} />
     </section>
   );
 };
