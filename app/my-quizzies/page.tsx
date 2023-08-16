@@ -1,5 +1,7 @@
+import MyQuizzesSection from "../../components/MyQuizzes/my-quizzes";
+
 const myQuizzies = () => {
-  return <h1>My Quizzies</h1>;
-}
+  return <MyQuizzesSection />;
+};
 
 export default myQuizzies;

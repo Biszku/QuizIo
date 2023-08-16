@@ -1,5 +1,7 @@
+import LeadboardContent from "../../components/Leadboard/leadboard";
+
 const Leadboard = () => {
-  return <h1>Leadboard</h1>;
+  return <LeadboardContent />;
 };
 
 export default Leadboard;
