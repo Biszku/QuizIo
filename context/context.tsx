@@ -61,14 +61,19 @@ const MainContextProvider: FC<{ children: React.ReactNode }> = ({
     questions?: any[];
   }) =>
     setQuizzes((prev) => {
-      // if (
-      //   prev.includes({
-      //     category: quiz.category,
-      //     difficulty: quiz.difficulty,
-      //     status: quiz.status,
-      //   })
-      // )
-      //   return prev;
+      if (
+        prev.find(
+          (el) =>
+            el.category === quiz.category && el.difficulty === quiz.difficulty
+        )
+      ) {
+        return prev.map((quizEl) =>
+          quizEl.category === quiz.category &&
+          quizEl.difficulty === quiz.difficulty
+            ? quiz
+            : quizEl
+        );
+      }
       return [quiz, ...prev];
     });
 
