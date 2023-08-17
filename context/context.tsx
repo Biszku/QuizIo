@@ -7,7 +7,8 @@ interface MainContextData {
         category: string;
         difficulty: string;
         status: string;
-        questions?: any[];
+        questions: any[];
+        numOfQuestion: number;
       }[]
     | [];
   checkboxRef: any;
@@ -19,7 +20,8 @@ interface MainContextData {
     category: string;
     difficulty: string;
     status: string;
-    questions?: any[];
+    questions: any[];
+    numOfQuestion: number;
   }) => void;
 }
 
@@ -41,7 +43,8 @@ const MainContextProvider: FC<{ children: React.ReactNode }> = ({
       category: string;
       difficulty: string;
       status: string;
-      questions?: any[];
+      questions: any[];
+      numOfQuestion: number;
     }[]
   >([]);
   const [visibilityOfCategoryList, setVisibilityOfCategoryList] =
@@ -58,7 +61,8 @@ const MainContextProvider: FC<{ children: React.ReactNode }> = ({
     category: string;
     difficulty: string;
     status: string;
-    questions?: any[];
+    questions: any[];
+    numOfQuestion: number;
   }) =>
     setQuizzes((prev) => {
       if (
