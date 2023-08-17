@@ -12,21 +12,32 @@ interface ArrOfQuizziesProp {
   questionfromContinue?: any[];
 }
 
-const SingleQuiz: FC<ArrOfQuizziesProp> = ({
-  arrOfQuizzies,
-  info,
-  questionfromContinue,
-}) => {
+const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies, info }) => {
   const { addQuiz, quizzes } = useContext(MainContext);
 
+  const NumOfCurQuestionOfQuizFromHistory = quizzes.find(
+    (el) => el.category === info.category && el.difficulty === info.difficult
+  )?.numOfQuestion;
+
+  const PointsOfQuizFromHistory = quizzes.find(
+    (el) => el.category === info.category && el.difficulty === info.difficult
+  )?.scoredPoints;
+
   const [quizzies, setQuizzies] = useState(arrOfQuizzies);
-
-  if (questionfromContinue) setQuizzies(questionfromContinue);
-
   const [numOfcurQuiz, setNumOfcurQuiz] = useState(0);
   const [gameInfo, setGameInfo] = useState({
     points: 0,
   });
+
+  console.log(gameInfo.points);
+
+  useEffect(() => {
+    if (NumOfCurQuestionOfQuizFromHistory)
+      setNumOfcurQuiz(NumOfCurQuestionOfQuizFromHistory);
+    if (PointsOfQuizFromHistory)
+      setGameInfo({ points: PointsOfQuizFromHistory });
+  }, []);
+
   const arrOfAnswers = [];
   const correctAnswer: any[] = [];
 
@@ -55,14 +66,27 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
     addQuiz({
       category: info.category,
       difficulty: info.difficult,
-      questions: quizzies.slice(numOfcurQuiz, quizzies.length),
-      status: "unfinished",
+      questions: quizzies,
+      numOfQuestion: numOfcurQuiz,
+      status: numOfcurQuiz === 20 ? "finished" : "unfinished",
+      scoredPoints: gameInfo.points,
     });
   }, [numOfcurQuiz]);
 
+  // if (
+  //   quizzes.find(
+  //     (el) => el.category === info.category && el.difficulty === info.difficult
+  //   )?.category !== undefined
+  // ) {
+  //   const quizFromHistory = quizzes.find(
+  //     (el) => el.category === info.category && el.difficulty === info.difficult
+  //   )?.questions;
+  //   setQuizzies(quizFromHistory);
+  // }
+
   return (
     <>
-      {numOfcurQuiz < 20 && (
+      {numOfcurQuiz < quizzies.length && (
         <article
           key={quizzies[numOfcurQuiz].id}
           className="quiz_container_single-quiz"
@@ -106,7 +130,7 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
           </div>
         </article>
       )}
-      {numOfcurQuiz === 20 && (
+      {numOfcurQuiz === quizzies.length && (
         <article className="quiz_container_quiz-summary">
           <span>
             You scored {gameInfo.points}/{quizzies.length}
