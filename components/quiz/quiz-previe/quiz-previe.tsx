@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FC } from "react";
 import { HiChevronRight } from "react-icons/hi";
 import GetQuzzies from "@/utils/getQuzzies";
+import StartQuizButton from "./quiz-previe-button";
 
 interface ParamsSlug {
   params: {
@@ -70,12 +71,9 @@ const QuizPrevie: FC<ParamsSlug> = async ({ params }) => {
             </span>
           </li>
         </ul>
-        <Link
-          className="quiz-previe-container_content-button btn"
-          href={`/quiz/${params.category}/${params.difficulty}`}
-        >
-          Start Quiz
-        </Link>
+        <StartQuizButton
+          params={{ category: params.category, difficulty: params.difficulty }}
+        />
       </div>
     </section>
   );
