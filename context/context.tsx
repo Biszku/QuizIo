@@ -25,6 +25,7 @@ interface MainContextData {
     numOfQuestion: number;
     scoredPoints: number;
   }) => void;
+  delQuiz: (category: string, difficulty: string) => void;
 }
 
 export const MainContext = createContext<MainContextData>({
@@ -35,6 +36,7 @@ export const MainContext = createContext<MainContextData>({
   setCurCat: () => {},
   changeVisibility: () => {},
   addQuiz: () => {},
+  delQuiz: () => {},
 });
 
 const MainContextProvider: FC<{ children: React.ReactNode }> = ({
@@ -59,6 +61,13 @@ const MainContextProvider: FC<{ children: React.ReactNode }> = ({
   const checkboxRef = useRef<HTMLInputElement | null>(null);
 
   const changeVisibility = () => setVisibilityOfCategoryList((prev) => !prev);
+
+  const delQuiz = (category: string, difficulty: string) =>
+    setQuizzes((prev) =>
+      prev.filter(
+        (el) => el.category !== category && el.difficulty !== difficulty
+      )
+    );
 
   const addQuiz = (quiz: {
     category: string;
@@ -95,6 +104,7 @@ const MainContextProvider: FC<{ children: React.ReactNode }> = ({
         checkboxRef,
         visibilityOfCategoryList,
         changeVisibility,
+        delQuiz,
       }}
     >
       {children}
