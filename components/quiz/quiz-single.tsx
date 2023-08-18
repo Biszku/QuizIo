@@ -29,8 +29,6 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies, info }) => {
     points: 0,
   });
 
-  console.log(gameInfo.points);
-
   useEffect(() => {
     if (NumOfCurQuestionOfQuizFromHistory)
       setNumOfcurQuiz(NumOfCurQuestionOfQuizFromHistory);
