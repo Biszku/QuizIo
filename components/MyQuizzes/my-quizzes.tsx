@@ -55,6 +55,9 @@ const MyQuizzesSection = () => {
           <HiArrowSmRight className="my-quizzes-container_pagination-increase-icon" />
         </button>
       </div>
+      <span className="my-quizzes-container-noQuizzes">
+        You have no started or finished quizzes
+      </span>
     </div>
   );
 };
