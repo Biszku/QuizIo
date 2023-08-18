@@ -1,0 +1,111 @@
+.my-quizzes-container {
+  padding: 3rem 1rem 1.5rem 1rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &_pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    &-decrease,
+    &-increase {
+      background-color: transparent;
+      visibility: hidden;
+      opacity: 0;
+      transition: all 0.3s;
+      transform: translateY(1rem);
+
+      &-icon {
+        font-size: 1.8rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    &-basic {
+      font-size: 1.4rem;
+      background-color: transparent;
+      transition: all 0.3s;
+    }
+  }
+
+  &_grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    row-gap: 1rem;
+    column-gap: 1rem;
+  }
+
+  &_item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.4rem;
+    overflow: hidden;
+
+    &-icon-link-to-info {
+      position: absolute;
+      top: 5%;
+      right: 5%;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    &_content {
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      flex: 1;
+      &_container {
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(0.1rem);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        &-category {
+          font-size: 1.4rem;
+          font-weight: 500;
+        }
+        &-difficulty {
+          font-size: 0.8rem;
+          font-weight: 700;
+        }
+      }
+    }
+    &_action-container {
+      &-link {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.2rem;
+        padding: 0.2rem 0rem;
+        &-text {
+          font-size: 0.8rem;
+        }
+        &-icon {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
+
+.btn--visible {
+  transform: translateY(0rem);
+  opacity: 1;
+  visibility: visible;
+}
+
+.active-page {
+  font-weight: bolder;
+}
