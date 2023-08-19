@@ -14,7 +14,7 @@ const MyQuizzesSection = () => {
   }
   // console.log(page);
   return (
-    <div className="my-quizzes-container">
+    <section className="my-quizzes-container">
       <div className="my-quizzes-container_grid">
         {quizzes.length > 0 &&
           quizzesSplitInArray[page].map((el, index) => (
@@ -55,10 +55,12 @@ const MyQuizzesSection = () => {
           <HiArrowSmRight className="my-quizzes-container_pagination-increase-icon" />
         </button>
       </div>
-      <span className="my-quizzes-container-noQuizzes">
-        You have no started or finished quizzes
-      </span>
-    </div>
+      {quizzes.length === 0 && (
+        <span className="my-quizzes-container-noQuizzes">
+          You have no started or finished quizzes
+        </span>
+      )}
+    </section>
   );
 };
 
