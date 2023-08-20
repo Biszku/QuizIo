@@ -24,7 +24,7 @@ const MyQuizzesItem: FC<MyQuzziesProp> = ({ el, index }) => {
       <div
         className="my-quizzes-container_item_content"
         style={{
-          backgroundImage: `url('/${el.category}.jpg')`,
+          backgroundImage: `url('/mini-${el.category}.jpg')`,
         }}
       >
         <div className="my-quizzes-container_item_content_container">
