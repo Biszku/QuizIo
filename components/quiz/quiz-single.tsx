@@ -66,7 +66,7 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies, info }) => {
       difficulty: info.difficult,
       questions: quizzies,
       numOfQuestion: numOfcurQuiz,
-      status: numOfcurQuiz === 20 ? "finished" : "unfinished",
+      status: numOfcurQuiz === quizzies.length ? "finished" : "unfinished",
       scoredPoints: gameInfo.points,
     });
   }, [numOfcurQuiz]);
