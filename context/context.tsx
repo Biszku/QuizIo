@@ -64,9 +64,13 @@ const MainContextProvider: FC<{ children: React.ReactNode }> = ({
 
   const delQuiz = (category: string, difficulty: string) =>
     setQuizzes((prev) =>
-      prev.filter(
-        (el) => el.category === category && el.difficulty !== difficulty
-      )
+      prev.filter((el) => {
+        if (el.category === category && el.difficulty === difficulty) {
+          console.log(1);
+          return false;
+        }
+        return true;
+      })
     );
 
   const addQuiz = (quiz: {
