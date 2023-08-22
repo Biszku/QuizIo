@@ -20,7 +20,12 @@ interface MyQuzziesProp {
 const MyQuizzesItem: FC<MyQuzziesProp> = ({ el, index }) => {
   const { delQuiz } = useContext(MainContext);
   return (
-    <div className="my-quizzes-container_item">
+    <div
+      className="my-quizzes-container_item"
+      style={{
+        animationDelay: `${0.1 * index}s`,
+      }}
+    >
       <div
         className="my-quizzes-container_item_content"
         style={{
