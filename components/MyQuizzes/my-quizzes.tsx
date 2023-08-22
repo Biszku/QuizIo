@@ -12,13 +12,13 @@ const MyQuizzesSection = () => {
   for (let x = 0; x < quizzes.length; x += 6) {
     quizzesSplitInArray.push(quizzes.slice(x, x + 6));
   }
-  // console.log(page);
+
   return (
     <section className="my-quizzes-container">
       <div className="my-quizzes-container_grid">
         {quizzes.length > 0 &&
           quizzesSplitInArray[page].map((el, index) => (
-            <MyQuizzesItem key={index} el={el} index={index} />
+            <MyQuizzesItem key={el.questions[0].id} el={el} index={index} />
           ))}
       </div>
       <div className="my-quizzes-container_pagination">
