@@ -1,4 +1,4 @@
-import QuizInfo from "@/components/Quiz-info/quiz--info";
+import QuizInfo from "@/components/Quiz-info/quiz-info";
 import { FC } from "react";
 
 interface ParamsSlug {
