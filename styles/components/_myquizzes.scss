@@ -68,7 +68,8 @@
     flex-direction: column;
     border-radius: 0.4rem;
     overflow: hidden;
-    animation: scaleUp 0.3s;
+    opacity: 0;
+    animation: scaleUp 0.3s forwards;
 
     &-icon-link-to-info {
       position: absolute;
@@ -132,12 +133,13 @@
 
 @keyframes scaleUp {
   0% {
-    transform: scale(100%);
+    transform: scale(10%);
   }
   50% {
-    transform: scale(110%);
+    opacity: 1;
   }
   100% {
+    opacity: 1;
     transform: scale(100%);
   }
 }
