@@ -38,6 +38,7 @@ const MyQuizzesSection = () => {
                 page === index ? "active-page" : ""
               }`}
               onClick={() => setPage(index)}
+              key={index}
             >
               {index + 1}
             </button>
