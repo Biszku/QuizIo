@@ -45,15 +45,6 @@
       display: flex;
       align-items: center;
       justify-content: space-around;
-      &-checkbox {
-        display: none;
-      }
-
-      &-checkbox:checked ~ &-label {
-        animation-name: rotateToDown;
-        animation-duration: 0.4s;
-        transform: rotate(-180deg);
-      }
 
       &-label {
         display: grid;
@@ -67,7 +58,7 @@
 
       &-show-icon {
         font-size: 2.2rem;
-        transform: rotate(180deg);
+        transition: all 0.3s;
       }
     }
   }
@@ -191,16 +182,8 @@
   display: grid;
 }
 
-@keyframes rotateToDown {
-  0% {
-    transform: rotate(0deg);
-  }
-  80% {
-    transform: rotate(-200deg);
-  }
-  100% {
-    transform: rotate(-180deg);
-  }
+.activeList {
+  transform: rotate(180deg);
 }
 
 @keyframes Slide {

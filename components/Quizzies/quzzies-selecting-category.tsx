@@ -11,7 +11,7 @@ const QuizziesSelectingCategory = ({
   delay: number;
   visibility: boolean;
 }) => {
-  const { changeVisibility, checkboxRef, setCurCat } = useContext(MainContext);
+  const { changeVisibility, setCurCat } = useContext(MainContext);
 
   return (
     <div
@@ -23,7 +23,6 @@ const QuizziesSelectingCategory = ({
         animationDelay: `${0.05 * delay}s`,
       }}
       onClick={() => {
-        checkboxRef.current.checked = false;
         setCurCat(category);
         changeVisibility();
       }}

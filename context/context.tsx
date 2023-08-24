@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useState, FC, useRef } from "react";
+import React, { createContext, useState, FC } from "react";
 
 interface MainContextData {
   quizzes:
@@ -12,7 +12,7 @@ interface MainContextData {
         scoredPoints: number;
       }[]
     | [];
-  checkboxRef: any;
+
   currentCategory: string[];
   visibilityOfCategoryList: boolean;
   setCurCat: (category: string) => void;
@@ -30,7 +30,7 @@ interface MainContextData {
 
 export const MainContext = createContext<MainContextData>({
   quizzes: [],
-  checkboxRef: null,
+
   currentCategory: [""],
   visibilityOfCategoryList: false,
   setCurCat: () => {},
@@ -53,12 +53,10 @@ const MainContextProvider: FC<{ children: React.ReactNode }> = ({
     }[]
   >([]);
   const [visibilityOfCategoryList, setVisibilityOfCategoryList] =
-    useState<boolean>(false);
+    useState<boolean>(true);
   const [currentCategory, setCurrentCategory] = useState<string[]>([""]);
 
   const setCurCat = (category: string) => setCurrentCategory([category]);
-
-  const checkboxRef = useRef<HTMLInputElement | null>(null);
 
   const changeVisibility = () => setVisibilityOfCategoryList((prev) => !prev);
 
@@ -105,7 +103,7 @@ const MainContextProvider: FC<{ children: React.ReactNode }> = ({
         quizzes,
         currentCategory,
         setCurCat,
-        checkboxRef,
+
         visibilityOfCategoryList,
         changeVisibility,
         delQuiz,
