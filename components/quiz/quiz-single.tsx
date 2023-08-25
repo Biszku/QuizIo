@@ -5,21 +5,39 @@ import { MainContext } from "../../context/context";
 
 interface ArrOfQuizziesProp {
   arrOfQuizzies: any[];
+  timeToAnswer: number;
   info: {
     category: string;
     difficult: string;
   };
-  questionfromContinue?: any[];
 }
 
-const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies, info }) => {
+const SingleQuiz: FC<ArrOfQuizziesProp> = ({
+  arrOfQuizzies,
+  info,
+  timeToAnswer,
+}) => {
   const { addQuiz, quizzes } = useContext(MainContext);
 
-  const [quizzies, setQuizzies] = useState(arrOfQuizzies);
-  const [numOfcurQuiz, setNumOfcurQuiz] = useState(0);
-  const [gameInfo, setGameInfo] = useState({
-    points: 0,
-  });
+  const HistoryQuiz = quizzes.find(
+    (el) => el.category === info.category && el.difficulty === info.difficult
+  );
+
+  const quizziesState = HistoryQuiz ? HistoryQuiz?.questions : arrOfQuizzies;
+  const numOfcurQuizState = HistoryQuiz ? HistoryQuiz?.numOfQuestion : 0;
+  const gameInfoState = HistoryQuiz
+    ? {
+        points: HistoryQuiz?.scoredPoints,
+      }
+    : {
+        points: 0,
+      };
+
+  const [timeToAnswerState, setTimeToAnswerState] = useState(timeToAnswer);
+  const [quizzies, setQuizzies] = useState(quizziesState);
+  const [numOfcurQuiz, setNumOfcurQuiz] = useState(numOfcurQuizState);
+  const [gameInfo, setGameInfo] = useState(gameInfoState);
+  const [firstLoad, setFirstLoad] = useState(true);
 
   const arrOfAnswers = [];
   const correctAnswer: any[] = [];
@@ -35,17 +53,6 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies, info }) => {
     if (quizzies[numOfcurQuiz].correct_answers[answerObj] === "true")
       correctAnswer.push(answerObj.slice(0, 8));
   }
-
-  const HistoryQuiz = quizzes.find(
-    (el) => el.category === info.category && el.difficulty === info.difficult
-  );
-
-  useEffect(() => {
-    if (HistoryQuiz?.numOfQuestion) setNumOfcurQuiz(HistoryQuiz?.numOfQuestion);
-    if (HistoryQuiz?.scoredPoints)
-      setGameInfo({ points: HistoryQuiz?.scoredPoints });
-    if (HistoryQuiz?.questions) setQuizzies(HistoryQuiz?.questions);
-  }, []);
 
   const chooseAnswer = (answer: any) => {
     let IsTrueAnswer = false;
@@ -69,19 +76,46 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies, info }) => {
       })
     );
     setNumOfcurQuiz((prev) => prev + 1);
+    setTimeToAnswerState(timeToAnswer);
   };
 
   useEffect(() => {
-    console.log(quizzies);
-    addQuiz({
-      category: info.category,
-      difficulty: info.difficult,
-      questions: quizzies,
-      numOfQuestion: numOfcurQuiz,
-      status: numOfcurQuiz === quizzies.length ? "finished" : "unfinished",
-      scoredPoints: gameInfo.points,
-    });
+    const timer = setInterval(
+      () => setTimeToAnswerState((prev) => prev - 1),
+      1000
+    );
+
+    if (numOfcurQuiz === quizzies.length) clearInterval(timer);
+    if (firstLoad === false) {
+      addQuiz({
+        category: info.category,
+        difficulty: info.difficult,
+        questions: quizzies,
+        numOfQuestion: numOfcurQuiz,
+        status: numOfcurQuiz === quizzies.length ? "finished" : "unfinished",
+        scoredPoints: gameInfo.points,
+      });
+    } else setFirstLoad(false);
+    return () => clearInterval(timer);
   }, [numOfcurQuiz]);
+
+  useEffect(() => {
+    if (timeToAnswerState < 0) {
+      setQuizzies((prev) =>
+        prev.map((el, index) => {
+          if (index === numOfcurQuiz)
+            return {
+              ...el,
+              yourAnswer: { answer: "", isTrue: false },
+            };
+
+          return el;
+        })
+      );
+      setNumOfcurQuiz((prev) => prev + 1);
+      setTimeToAnswerState(timeToAnswer);
+    }
+  }, [timeToAnswerState]);
 
   // if (
   //   quizzes.find(
@@ -101,6 +135,7 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies, info }) => {
           key={quizzies[numOfcurQuiz].id}
           className="quiz_container_single-quiz"
         >
+          <span>{timeToAnswerState}</span>
           <div className="quiz_container_single-quiz_info-box">
             <span>
               {numOfcurQuiz + 1} / {quizzies.length}
