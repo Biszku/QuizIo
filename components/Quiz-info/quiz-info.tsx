@@ -1,6 +1,8 @@
 import { FC } from "react";
 import Link from "next/link";
 import { HiArrowSmLeft } from "react-icons/hi";
+import StatusElement from "./quiz-info-status";
+import InfoContainer from "./quiz-info-container";
 
 interface ParamsSlug {
   params: {
@@ -8,7 +10,6 @@ interface ParamsSlug {
     difficulty: string;
   };
 }
-
 const QuizInfo: FC<ParamsSlug> = ({ params }) => {
   return (
     <section
@@ -19,8 +20,25 @@ const QuizInfo: FC<ParamsSlug> = ({ params }) => {
     >
       <div className="my-quizzes-info_container">
         <div className="my-quizzes-info_container-filler"></div>
-        <span>{`${params.category}`}</span>
-        <span>{`${params.difficulty}`}</span>
+        <div className="my-quizzes-info_container_core-info-container">
+          <span className="my-quizzes-info_container_core-info-container-category">{`${params.category}`}</span>
+          <span className="my-quizzes-info_container_core-info-container-difficulty">{`${params.difficulty}`}</span>
+        </div>
+
+        <StatusElement
+          params={{
+            category: params.category,
+            difficulty: params.difficulty,
+          }}
+        />
+
+        <InfoContainer
+          params={{
+            category: params.category,
+            difficulty: params.difficulty,
+          }}
+        />
+
         <Link href="/my-quizzies" className="my-quizzes-info_container-link">
           <HiArrowSmLeft />
         </Link>
