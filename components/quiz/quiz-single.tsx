@@ -15,38 +15,14 @@ interface ArrOfQuizziesProp {
 const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies, info }) => {
   const { addQuiz, quizzes } = useContext(MainContext);
 
-  const NumOfCurQuestionOfQuizFromHistory = quizzes.find(
-    (el) => el.category === info.category && el.difficulty === info.difficult
-  )?.numOfQuestion;
-
-  const PointsOfQuizFromHistory = quizzes.find(
-    (el) => el.category === info.category && el.difficulty === info.difficult
-  )?.scoredPoints;
-
   const [quizzies, setQuizzies] = useState(arrOfQuizzies);
   const [numOfcurQuiz, setNumOfcurQuiz] = useState(0);
   const [gameInfo, setGameInfo] = useState({
     points: 0,
   });
 
-  useEffect(() => {
-    if (NumOfCurQuestionOfQuizFromHistory)
-      setNumOfcurQuiz(NumOfCurQuestionOfQuizFromHistory);
-    if (PointsOfQuizFromHistory)
-      setGameInfo({ points: PointsOfQuizFromHistory });
-  }, []);
-
   const arrOfAnswers = [];
   const correctAnswer: any[] = [];
-
-  const chooseAnswer = (answer: any) => {
-    if (chooseAnswer.length === 0 && answer === "none")
-      setGameInfo((prev) => ({ ...prev, points: prev.points + 1 }));
-    if (correctAnswer.includes(answer))
-      setGameInfo((prev) => ({ ...prev, points: prev.points + 1 }));
-
-    setNumOfcurQuiz((prev) => prev + 1);
-  };
 
   for (const aliasToAnswer in quizzies[numOfcurQuiz]?.answers) {
     arrOfAnswers.push({
@@ -60,7 +36,43 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ arrOfQuizzies, info }) => {
       correctAnswer.push(answerObj.slice(0, 8));
   }
 
+  const HistoryQuiz = quizzes.find(
+    (el) => el.category === info.category && el.difficulty === info.difficult
+  );
+
   useEffect(() => {
+    if (HistoryQuiz?.numOfQuestion) setNumOfcurQuiz(HistoryQuiz?.numOfQuestion);
+    if (HistoryQuiz?.scoredPoints)
+      setGameInfo({ points: HistoryQuiz?.scoredPoints });
+    if (HistoryQuiz?.questions) setQuizzies(HistoryQuiz?.questions);
+  }, []);
+
+  const chooseAnswer = (answer: any) => {
+    let IsTrueAnswer = false;
+    if (
+      (chooseAnswer.length === 0 && answer === "none") ||
+      correctAnswer.includes(answer)
+    ) {
+      setGameInfo((prev) => ({ ...prev, points: prev.points + 1 }));
+      IsTrueAnswer = true;
+    }
+
+    setQuizzies((prev) =>
+      prev.map((el, index) => {
+        if (index === numOfcurQuiz)
+          return {
+            ...el,
+            yourAnswer: { answer: answer, isTrue: IsTrueAnswer },
+          };
+
+        return el;
+      })
+    );
+    setNumOfcurQuiz((prev) => prev + 1);
+  };
+
+  useEffect(() => {
+    console.log(quizzies);
     addQuiz({
       category: info.category,
       difficulty: info.difficult,
