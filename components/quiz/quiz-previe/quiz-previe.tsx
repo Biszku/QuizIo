@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { FC } from "react";
 import { HiChevronRight } from "react-icons/hi";
 import GetQuzzies from "@/utils/getQuzzies";
@@ -17,13 +16,13 @@ const QuizPrevie: FC<ParamsSlug> = async ({ params }) => {
   let timeToAnswer = 0;
   switch (params.difficulty) {
     case "easy":
-      timeToAnswer = 30;
+      timeToAnswer = 15;
       break;
     case "medium":
-      timeToAnswer = 45;
+      timeToAnswer = 20;
       break;
     case "hard":
-      timeToAnswer = 60;
+      timeToAnswer = 25;
       break;
   }
   return (
