@@ -22,8 +22,16 @@ const InfoContainer: FC<ParamsSlug> = ({ params }) => {
 
   return (
     <div className="my-quizzes-info_container_info-container">
-      {curQuiz?.status === "finished" && <FinishedElement />}
-      {curQuiz?.status === "unfinished" && <ContinueElement />}
+      {curQuiz?.status === "finished" && (
+        <FinishedElement quizziesQuestions={curQuiz.questions} />
+      )}
+      {curQuiz?.status === "unfinished" && (
+        <ContinueElement
+          quizziesQuestions={curQuiz.questions}
+          params={{ category: params.category, difficulty: params.difficulty }}
+          numOfCurQuiz={curQuiz.numOfQuestion}
+        />
+      )}
     </div>
   );
 };
