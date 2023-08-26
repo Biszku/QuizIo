@@ -68,7 +68,11 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
         if (index === numOfcurQuiz)
           return {
             ...el,
-            yourAnswer: { answer: answer, isTrue: IsTrueAnswer },
+            yourAnswer: {
+              answer: answer,
+              isTrue: IsTrueAnswer,
+              answerTime: timeToAnswer - timeToAnswerState,
+            },
           };
 
         return el;
@@ -105,7 +109,11 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
           if (index === numOfcurQuiz)
             return {
               ...el,
-              yourAnswer: { answer: "", isTrue: false },
+              yourAnswer: {
+                answer: null,
+                isTrue: false,
+                answerTime: timeToAnswer,
+              },
             };
 
           return el;
@@ -134,7 +142,19 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
           key={quizzies[numOfcurQuiz].id}
           className="quiz_container_single-quiz"
         >
-          <span>{timeToAnswerState}</span>
+          <div
+            className="timer-background"
+            style={{
+              width: `${(timeToAnswerState * 100) / timeToAnswer}%`,
+              background: `${
+                (timeToAnswerState * 100) / timeToAnswer > 33
+                  ? (timeToAnswerState * 100) / timeToAnswer > 66
+                    ? "green"
+                    : "orange"
+                  : "red"
+              }`,
+            }}
+          ></div>
           <div className="quiz_container_single-quiz_info-box">
             <span>
               {numOfcurQuiz + 1} / {quizzies.length}
