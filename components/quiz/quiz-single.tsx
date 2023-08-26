@@ -37,7 +37,6 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
   const [quizzies, setQuizzies] = useState(quizziesState);
   const [numOfcurQuiz, setNumOfcurQuiz] = useState(numOfcurQuizState);
   const [gameInfo, setGameInfo] = useState(gameInfoState);
-  const [firstLoad, setFirstLoad] = useState(true);
 
   const arrOfAnswers = [];
   const correctAnswer: any[] = [];
@@ -86,16 +85,16 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
     );
 
     if (numOfcurQuiz === quizzies.length) clearInterval(timer);
-    if (firstLoad === false) {
-      addQuiz({
-        category: info.category,
-        difficulty: info.difficult,
-        questions: quizzies,
-        numOfQuestion: numOfcurQuiz,
-        status: numOfcurQuiz === quizzies.length ? "finished" : "unfinished",
-        scoredPoints: gameInfo.points,
-      });
-    } else setFirstLoad(false);
+    // if (firstLoad === false) {
+    addQuiz({
+      category: info.category,
+      difficulty: info.difficult,
+      questions: quizzies,
+      numOfQuestion: numOfcurQuiz,
+      status: numOfcurQuiz === quizzies.length ? "finished" : "unfinished",
+      scoredPoints: gameInfo.points,
+    });
+    // } else setFirstLoad(false);
     return () => clearInterval(timer);
   }, [numOfcurQuiz]);
 
