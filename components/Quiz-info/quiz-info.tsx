@@ -19,7 +19,6 @@ const QuizInfo: FC<ParamsSlug> = ({ params }) => {
       }}
     >
       <div className="my-quizzes-info_container">
-        <div className="my-quizzes-info_container-filler"></div>
         <div className="my-quizzes-info_container_core-info-container">
           <span className="my-quizzes-info_container_core-info-container-category">{`${params.category}`}</span>
           <span className="my-quizzes-info_container_core-info-container-difficulty">{`${params.difficulty}`}</span>
