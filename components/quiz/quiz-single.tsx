@@ -2,6 +2,7 @@
 import { useState, FC, useEffect } from "react";
 import { useContext } from "react";
 import { MainContext } from "../../context/context";
+import QuizSummary from "./quiz-summary";
 
 interface ArrOfQuizziesProp {
   arrOfQuizzies: any[];
@@ -195,11 +196,11 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
         </article>
       )}
       {numOfcurQuiz === quizzies.length && (
-        <article className="quiz_container_quiz-summary">
-          <span>
-            You scored {gameInfo.points}/{quizzies.length}
-          </span>
-        </article>
+        <QuizSummary
+          points={gameInfo.points}
+          quizzies={quizzies}
+          animation="true"
+        />
       )}
     </>
   );
