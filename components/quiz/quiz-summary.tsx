@@ -31,7 +31,7 @@ const QuizSummary: FC<QuizSummaryProps> = ({
   return (
     <>
       <article className="quiz_container_quiz-summary">
-        <span>
+        <span className="quiz_container_quiz-summary-points">
           {curPoints}/{quizzies.length}
         </span>
       </article>
