@@ -2,19 +2,15 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
   display: grid;
   place-items: center;
+
   position: relative;
 
-  &-background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    top: 0%;
-    left: 0%;
-    z-index: -1;
+  &--backdrop-filter {
+    height: 80%;
+    width: 85%;
+    backdrop-filter: blur(0.2rem);
   }
 
   &_content {
@@ -22,7 +18,6 @@
     width: 85%;
     border-radius: 1rem;
     background-color: rgba(240, 224, 204, 0.3);
-    backdrop-filter: blur(0.1rem);
 
     display: flex;
     flex-direction: column;
@@ -30,6 +25,13 @@
     justify-content: space-evenly;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     padding: 1rem;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    z-index: 1;
 
     &-category {
       font-size: 2.4rem;

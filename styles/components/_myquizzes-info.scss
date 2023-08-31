@@ -6,6 +6,12 @@
   background-size: cover;
   position: relative;
 
+  &--backdrop-filter {
+    height: 80%;
+    width: 80%;
+    backdrop-filter: blur(0.2rem);
+  }
+
   &_container {
     padding: 1rem;
     display: flex;
@@ -13,14 +19,18 @@
     gap: 1.3rem;
 
     align-items: center;
-    backdrop-filter: blur(1rem);
+
     box-shadow: rgba(99, 99, 99, 0.2) 0rem 0.2rem 0.8rem 0rem;
     background-color: rgba(240, 224, 204, 0.1);
     height: 80%;
     width: 80%;
     border-radius: 0.1rem;
     overflow: hidden;
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
 
     &_info-container {
       width: 100%;
