@@ -5,9 +5,10 @@ const Header = () => {
   return (
     <header className="main-header">
       <Logo />
-      <Login />
+      {/* Waiting for Back End Skills */}
+      {/* <Login /> */}
     </header>
   );
-}
+};
 
 export default Header;

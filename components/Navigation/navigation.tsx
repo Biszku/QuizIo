@@ -20,7 +20,8 @@ const MainNav = () => {
             <span className="nav_list-item_container_text">My Quizzies</span>
           </Link>
         </li>
-        <li className="nav_list-item">
+        {/* Waiting for Back End Skills */}
+        {/* <li className="nav_list-item">
           <Link href="/leadboard" className="nav_list-item_container">
             <ImTrophy className="nav_list-item_container_icon" />
             <span className="nav_list-item_container_text">Leadboard</span>
@@ -31,7 +32,7 @@ const MainNav = () => {
             <ImUser className="nav_list-item_container_icon" />
             <span className="nav_list-item_container_text">Profile</span>
           </Link>
-        </li>
+        </li> */}
       </ul>
     </nav>
   );
