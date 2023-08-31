@@ -64,7 +64,6 @@ const MainContextProvider: FC<{ children: React.ReactNode }> = ({
     setQuizzes((prev) =>
       prev.filter((el) => {
         if (el.category === category && el.difficulty === difficulty) {
-          console.log(1);
           return false;
         }
         return true;
