@@ -31,31 +31,37 @@ const QuizInfo: FC<ParamsSlug> = ({ params }) => {
       }}
     >
       {curQuiz?.status === "unfinished" && (
-        <div className="my-quizzes-info_container">
-          <div className="my-quizzes-info_container_core-info-container">
-            <span className="my-quizzes-info_container_core-info-container-category">{`${params.category}`}</span>
-            <span className="my-quizzes-info_container_core-info-container-difficulty">{`${params.difficulty}`}</span>
+        <>
+          <div className="my-quizzes-info_container">
+            <div className="my-quizzes-info_container_core-info-container">
+              <span className="my-quizzes-info_container_core-info-container-category">{`${params.category}`}</span>
+              <span className="my-quizzes-info_container_core-info-container-difficulty">{`${params.difficulty}`}</span>
+            </div>
+
+            <StatusElement
+              params={{
+                category: params.category,
+                difficulty: params.difficulty,
+              }}
+            />
+
+            <InfoContainer
+              params={{
+                category: params.category,
+                difficulty: params.difficulty,
+              }}
+              curQuiz={curQuiz}
+            />
+
+            <Link
+              href="/my-quizzies"
+              className="my-quizzes-info_container-link"
+            >
+              <HiArrowSmLeft />
+            </Link>
           </div>
-
-          <StatusElement
-            params={{
-              category: params.category,
-              difficulty: params.difficulty,
-            }}
-          />
-
-          <InfoContainer
-            params={{
-              category: params.category,
-              difficulty: params.difficulty,
-            }}
-            curQuiz={curQuiz}
-          />
-
-          <Link href="/my-quizzies" className="my-quizzes-info_container-link">
-            <HiArrowSmLeft />
-          </Link>
-        </div>
+          <div className="my-quizzes-info--backdrop-filter"></div>
+        </>
       )}
       {curQuiz?.status === "finished" && (
         <QuizSummary
