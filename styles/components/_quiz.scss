@@ -8,6 +8,34 @@
   );
   position: relative;
 
+  &_quiz-summary {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 90%;
+    width: 90%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-image: linear-gradient(
+      to right bottom,
+      rgba(0, 0, 0, 0.1),
+      rgba(0, 0, 0, 0.2)
+    );
+    border-radius: 0.4rem;
+    z-index: 2;
+    transform: translate(-50%, -50%);
+
+    &--backdrop-filter {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 90%;
+      height: 90%;
+      z-index: 1;
+      backdrop-filter: blur(1rem);
+      transform: translate(-50%, -50%);
+    }
+  }
+
   &_single-quiz {
     // height: minmax(90%, 100%);
     width: 90%;
