@@ -23,16 +23,19 @@
     border-radius: 0.4rem;
     z-index: 2;
     transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
     &--backdrop-filter {
-      position: absolute;
-      top: 50%;
-      left: 50%;
       width: 90%;
       height: 90%;
-      z-index: 1;
-      backdrop-filter: blur(1rem);
-      transform: translate(-50%, -50%);
+
+      backdrop-filter: blur(0.2rem);
+    }
+    &-points {
+      font-size: 4.2rem;
     }
   }
 
