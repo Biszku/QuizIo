@@ -15,13 +15,13 @@ const QuizContent: FC<parametersProps> = async ({ parameters }) => {
   let timeToAnswer = 0;
   switch (difficult) {
     case "easy":
-      timeToAnswer = 15;
+      timeToAnswer = 10;
       break;
     case "medium":
-      timeToAnswer = 20;
+      timeToAnswer = 15;
       break;
     case "hard":
-      timeToAnswer = 25;
+      timeToAnswer = 20;
       break;
   }
 

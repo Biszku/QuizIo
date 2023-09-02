@@ -16,13 +16,13 @@ const QuizPrevie: FC<ParamsSlug> = async ({ params }) => {
   let timeToAnswer = 0;
   switch (params.difficulty) {
     case "easy":
-      timeToAnswer = 15;
+      timeToAnswer = 10;
       break;
     case "medium":
-      timeToAnswer = 20;
+      timeToAnswer = 15;
       break;
     case "hard":
-      timeToAnswer = 25;
+      timeToAnswer = 20;
       break;
   }
   return (
