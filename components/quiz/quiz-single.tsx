@@ -39,7 +39,7 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
   const [numOfcurQuiz, setNumOfcurQuiz] = useState(numOfcurQuizState);
   const [gameInfo, setGameInfo] = useState(gameInfoState);
 
-  const arrOfAnswers = [];
+  const arrOfAnswers: { answer: string; value: string }[] = [];
   const correctAnswer: any[] = [];
 
   for (const aliasToAnswer in quizzies[numOfcurQuiz]?.answers) {
@@ -162,45 +162,51 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
             </span>
           </div>
           <div className="quiz_container_single-quiz_question-box">
-            <span className="quiz_container_single-quiz_question-box--question">
+            <span
+              className="quiz_container_single-quiz_question-box--question"
+              style={{
+                fontSize:
+                  quizzies[numOfcurQuiz].question.length > 100
+                    ? "0.8rem"
+                    : "0.9rem",
+              }}
+            >
               {quizzies[numOfcurQuiz].question}
             </span>
           </div>
           <div className="quiz_container_single-quiz_answers-box">
             {arrOfAnswers
               .filter((el) => el.value !== null)
-              .map((el, index) => {
+              .map((el, index, curArray) => {
                 return (
-                  <div
+                  <button
                     key={index}
-                    className="quiz_container_single-quiz_answers-box_answer"
+                    className="quiz_container_single-quiz_answers-box-btn btn"
+                    onClick={() => chooseAnswer(el.answer)}
+                    style={{
+                      fontSize:
+                        curArray.find((el) => el.value.length > 50) ||
+                        curArray.length > 5
+                          ? "0.7rem"
+                          : "0.8rem",
+                    }}
                   >
-                    <button
-                      className="quiz_container_single-quiz_answers-box_answer-btn btn"
-                      onClick={() => chooseAnswer(el.answer)}
-                    >
-                      {el.value}
-                    </button>
-                  </div>
+                    {el.value}
+                  </button>
                 );
               })}
-            <div className="quiz_container_single-quiz_answers-box_answer">
-              <button
-                className="quiz_container_single-quiz_answers-box_answer-btn btn"
-                onClick={() => chooseAnswer("none")}
-              >
-                none
-              </button>
-            </div>
+
+            <button
+              className="quiz_container_single-quiz_answers-box-btn btn"
+              onClick={() => chooseAnswer("none")}
+            >
+              none
+            </button>
           </div>
         </article>
       )}
-      {numOfcurQuiz === quizzies.length && (
-        <QuizSummary
-          points={gameInfo.points}
-          quizzies={quizzies}
-          animation="true"
-        />
+      {numOfcurQuiz === quizzies.length && HistoryQuiz && (
+        <QuizSummary quizziesInfo={HistoryQuiz} animation="true" />
       )}
     </>
   );
