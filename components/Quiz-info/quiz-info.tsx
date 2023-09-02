@@ -21,8 +21,6 @@ const QuizInfo: FC<ParamsSlug> = ({ params }) => {
       el.category === params.category && el.difficulty === params.difficulty
   );
 
-  console.log(curQuiz);
-
   return (
     <section
       className="my-quizzes-info"
@@ -64,11 +62,7 @@ const QuizInfo: FC<ParamsSlug> = ({ params }) => {
         </>
       )}
       {curQuiz?.status === "finished" && (
-        <QuizSummary
-          points={curQuiz.scoredPoints}
-          quizzies={curQuiz.questions}
-          animation="false"
-        />
+        <QuizSummary quizziesInfo={curQuiz} animation="false" />
       )}
     </section>
   );
