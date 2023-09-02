@@ -1,4 +1,4 @@
-import MainContextProvider from "@/context/context";
+import MainContextProvider from "../context/context";
 import LayoutPattern from "../components/Layout-pattern/layout-pattern";
 import type { Metadata } from "next";
 import { FC } from "react";
