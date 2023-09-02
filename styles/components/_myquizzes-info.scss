@@ -1,10 +1,14 @@
 .my-quizzes-info {
-  display: grid;
-  place-items: center;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  gap: 1rem;
 
   &--backdrop-filter {
     height: 80%;
