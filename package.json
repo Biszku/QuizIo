@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@next/font": "^13.4.12",
+    "@react-spring/web": "^9.7.3",
     "@types/node": "20.4.5",
     "@types/react": "18.2.17",
     "@types/react-dom": "18.2.7",
+    "framer-motion": "^10.16.2",
     "mongodb": "^5.8.1",
     "next": "13.4.12",
     "react": "18.2.0",
