@@ -17,8 +17,8 @@
     padding: 1rem;
     top: 50%;
     left: 50%;
-    height: 90%;
-    width: 90%;
+    height: 100%;
+    width: 100%;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     background-image: linear-gradient(
       to right bottom,
@@ -31,6 +31,18 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    &-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background-color: transparent;
+      border: 0.1rem solid black;
+      font-size: 1.2rem;
+      transition: all 0.2s;
+    }
 
     &-points {
       font-size: 4.2rem;
@@ -42,10 +54,12 @@
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
+      width: 100%;
 
       &-icon {
         font-size: 2.2rem;
       }
+
       &_avg-time-line-container {
         height: 0.5rem;
         border-radius: 100rem;
@@ -56,16 +70,26 @@
         );
         border: 0.1rem solid #333333;
         flex: 1;
+
         &-line {
           height: 100%;
-          background-color: green;
+          position: relative;
+
+          &-text {
+            position: absolute;
+            right: 0;
+            top: -200%;
+            transform: translate(50%, -50%);
+          }
         }
       }
+
       &-time-to-answer {
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 0.2rem;
+
         &-number {
           font-size: 1.2rem;
         }
@@ -76,7 +100,6 @@
       width: 90%;
       flex: 0 0 90%;
       backdrop-filter: blur(0.2rem);
-      margin: 8% 0%;
     }
   }
 
@@ -90,12 +113,16 @@
     overflow: hidden;
 
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 1;
     transition: all 0.3s;
 
     display: flex;
     flex-direction: column;
     gap: 1rem;
+
     &_info-box {
       & span {
         font-weight: bold;
@@ -157,7 +184,7 @@
   height: 0.3rem;
   // animation: timerAnimation 31s;
   // background-color: black;
-  transition: all 1.8s;
+  transition: all 1s;
   // backface-visibility: hidden;
 }
 
