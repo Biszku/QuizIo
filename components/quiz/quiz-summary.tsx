@@ -1,5 +1,10 @@
+"use client";
 import { FC, useEffect, useState } from "react";
 import { ImStopwatch } from "react-icons/im";
+import { HiRefresh } from "react-icons/hi";
+import { useContext } from "react";
+import { MainContext } from "../../context/context";
+import Link from "next/link";
 
 interface QuizSummaryProps {
   quizziesInfo: {
@@ -19,6 +24,8 @@ const QuizSummary: FC<QuizSummaryProps> = ({
 }) => {
   const [curPoints, setCurPoints] = useState(0);
   const [timeToAnswer, setTimeToAnswer] = useState(0);
+
+  const { delQuiz } = useContext(MainContext);
 
   useEffect(() => {
     switch (quizziesInfo.difficulty) {
@@ -51,8 +58,8 @@ const QuizSummary: FC<QuizSummaryProps> = ({
     }, 0) / quizziesInfo.questions.length;
 
   return (
-    <>
-      <article className="quiz_container_quiz-summary">
+    <article className="quiz_container_quiz-summary--backdrop-filter">
+      <div className="quiz_container_quiz-summary">
         <span className="quiz_container_quiz-summary-points">
           {curPoints}/{quizziesInfo.questions.length}
         </span>
@@ -72,7 +79,11 @@ const QuizSummary: FC<QuizSummaryProps> = ({
                     : "green"
                 }`,
               }}
-            ></div>
+            >
+              <span className="quiz_container_quiz-summary_avg-time-container_avg-time-line-container-line-text">
+                {avg_time}
+              </span>
+            </div>
           </div>
           <span className="quiz_container_quiz-summary_avg-time-container-time-to-answer">
             <span className="quiz_container_quiz-summary_avg-time-container-time-to-answer-number">
@@ -81,9 +92,29 @@ const QuizSummary: FC<QuizSummaryProps> = ({
             sec
           </span>
         </div>
-      </article>
-      <div className="quiz_container_quiz-summary--backdrop-filter"></div>
-    </>
+        <Link
+          href={`${
+            animation === `false`
+              ? `/quiz/${quizziesInfo.category}/${quizziesInfo.difficulty}`
+              : `/`
+          }`}
+          className="quiz_container_quiz-summary-btn btn"
+          onClick={() => {
+            if (animation === "false")
+              delQuiz(quizziesInfo.category, quizziesInfo.difficulty);
+          }}
+        >
+          {animation === "false" ? (
+            <>
+              Try Again
+              <HiRefresh />
+            </>
+          ) : (
+            `Finish`
+          )}
+        </Link>
+      </div>
+    </article>
   );
 };
 
