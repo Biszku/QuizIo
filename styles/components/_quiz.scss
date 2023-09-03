@@ -34,6 +34,28 @@
     align-items: center;
     gap: 1rem;
 
+    &_questions-container {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(1.8rem, 1fr));
+      row-gap: 0.8rem;
+      column-gap: 0.4rem;
+      margin-bottom: 1.5rem;
+
+      &_item {
+        border-radius: 0.2rem;
+        padding: 0.4rem 0rem;
+        background-color: #ff922b;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+          rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+          rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+    }
+
     &-btn {
       display: flex;
       align-items: center;
@@ -80,6 +102,16 @@
             right: 0;
             top: -200%;
             transform: translate(50%, -50%);
+          }
+
+          &-avg {
+            width: max-content;
+            position: absolute;
+            font-weight: bolder;
+            font-size: 0.6rem;
+            right: 0;
+            bottom: -300%;
+            transform: translate(50%, 60%);
           }
         }
       }
