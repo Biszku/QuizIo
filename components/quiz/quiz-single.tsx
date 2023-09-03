@@ -3,6 +3,7 @@ import { useState, FC, useEffect } from "react";
 import { useContext } from "react";
 import { MainContext } from "../../context/context";
 import QuizSummary from "./quiz-summary";
+import Quiz from "./quiz";
 
 interface ArrOfQuizziesProp {
   arrOfQuizzies: any[];
@@ -90,7 +91,7 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
     );
 
     if (numOfcurQuiz === quizzies.length) clearInterval(timer);
-    // if (firstLoad === false) {
+
     addQuiz({
       category: info.category,
       difficulty: info.difficult,
@@ -99,7 +100,7 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
       status: numOfcurQuiz === quizzies.length ? "finished" : "unfinished",
       scoredPoints: gameInfo.points,
     });
-    // } else setFirstLoad(false);
+
     return () => clearInterval(timer);
   }, [numOfcurQuiz]);
 
@@ -125,88 +126,22 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
     }
   }, [timeToAnswerState]);
 
-  // if (
-  //   quizzes.find(
-  //     (el) => el.category === info.category && el.difficulty === info.difficult
-  //   )?.category !== undefined
-  // ) {
-  //   const quizFromHistory = quizzes.find(
-  //     (el) => el.category === info.category && el.difficulty === info.difficult
-  //   )?.questions;
-  //   setQuizzies(quizFromHistory);
-  // }
-
   return (
     <>
       {numOfcurQuiz < quizzies.length && (
-        <article
-          key={quizzies[numOfcurQuiz].id}
-          className="quiz_container_single-quiz"
-        >
-          <div
-            className="timer-background"
-            style={{
-              width: `${(timeToAnswerState * 100) / timeToAnswer}%`,
-              background: `${
-                (timeToAnswerState * 100) / timeToAnswer > 33
-                  ? (timeToAnswerState * 100) / timeToAnswer > 66
-                    ? "green"
-                    : "orange"
-                  : "red"
-              }`,
-            }}
-          ></div>
-          <div className="quiz_container_single-quiz_info-box">
-            <span>
-              {numOfcurQuiz + 1} / {quizzies.length}
-            </span>
-          </div>
-          <div className="quiz_container_single-quiz_question-box">
-            <span
-              className="quiz_container_single-quiz_question-box--question"
-              style={{
-                fontSize:
-                  quizzies[numOfcurQuiz].question.length > 100
-                    ? "0.8rem"
-                    : "0.9rem",
-              }}
-            >
-              {quizzies[numOfcurQuiz].question}
-            </span>
-          </div>
-          <div className="quiz_container_single-quiz_answers-box">
-            {arrOfAnswers
-              .filter((el) => el.value !== null)
-              .map((el, index, curArray) => {
-                return (
-                  <button
-                    key={index}
-                    className="quiz_container_single-quiz_answers-box-btn btn"
-                    onClick={() => chooseAnswer(el.answer)}
-                    style={{
-                      fontSize:
-                        curArray.find((el) => el.value.length > 50) ||
-                        curArray.length > 5
-                          ? "0.7rem"
-                          : "0.8rem",
-                    }}
-                  >
-                    {el.value}
-                  </button>
-                );
-              })}
-
-            <button
-              className="quiz_container_single-quiz_answers-box-btn btn"
-              onClick={() => chooseAnswer("none")}
-            >
-              none
-            </button>
-          </div>
-        </article>
+        <Quiz
+          quizzies={quizzies}
+          numOfcurQuiz={numOfcurQuiz}
+          timers={{ timeToAnswer, timeToAnswerState }}
+          chooseAnswer={chooseAnswer}
+          arrOfAnswers={arrOfAnswers}
+        />
       )}
       {numOfcurQuiz === quizzies.length && HistoryQuiz && (
-        <QuizSummary quizziesInfo={HistoryQuiz} animation="true" />
+        <>
+          <QuizSummary quizziesInfo={HistoryQuiz} animation="true" />
+          <p></p>
+        </>
       )}
     </>
   );
