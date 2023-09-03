@@ -63,7 +63,24 @@ const QuizSummary: FC<QuizSummaryProps> = ({
         <span className="quiz_container_quiz-summary-points">
           {curPoints}/{quizziesInfo.questions.length}
         </span>
-        <div className="quiz_container_quiz-summary_questions-container"></div>
+        <div className="quiz_container_quiz-summary_questions-container">
+          {quizziesInfo.questions.map((el, index) => {
+            console.log(el.yourAnswer?.isTrue);
+
+            return (
+              <div
+                className="quiz_container_quiz-summary_questions-container_item"
+                style={{
+                  backgroundColor: `${
+                    el.yourAnswer?.isTrue ? "#40c057" : "#fa5252"
+                  }`,
+                }}
+              >
+                {index + 1}
+              </div>
+            );
+          })}
+        </div>
         <div className="quiz_container_quiz-summary_avg-time-container">
           <ImStopwatch className="quiz_container_quiz-summary_avg-time-container-icon" />
           <div className="quiz_container_quiz-summary_avg-time-container_avg-time-line-container">
@@ -82,6 +99,10 @@ const QuizSummary: FC<QuizSummaryProps> = ({
             >
               <span className="quiz_container_quiz-summary_avg-time-container_avg-time-line-container-line-text">
                 {avg_time}
+              </span>
+
+              <span className="quiz_container_quiz-summary_avg-time-container_avg-time-line-container-line-avg">
+                avg time
               </span>
             </div>
           </div>
