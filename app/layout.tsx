@@ -1,7 +1,16 @@
-import MainContextProvider from "../context/context";
-import LayoutPattern from "../components/Layout-pattern/layout-pattern";
+import "@/styles/main.scss";
+import MainContextProvider from "@/context/context";
 import type { Metadata } from "next";
 import { FC } from "react";
+import Footer from "@/components/Footer/footer";
+import MainNav from "@/components/Navigation/navigation";
+import Header from "@/components/Header/header";
+import { Poppins } from "@next/font/google";
+
+const poppins = Poppins({
+  subsets: ["devanagari"],
+  weight: "400",
+});
 
 export const metadata: Metadata = {
   title: "Your favorite Quiz app!",
@@ -12,7 +21,15 @@ const RootLayout: FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <html lang="en">
       <MainContextProvider>
-        <LayoutPattern>{children}</LayoutPattern>
+        <body className={poppins.className}>
+          <Header />
+          <main className="main-container">
+            <div id="portal"></div>
+            {children}
+
+            <Footer />
+          </main>
+        </body>
       </MainContextProvider>
     </html>
   );
