@@ -15,12 +15,16 @@ interface QuizSummaryProps {
     numOfQuestion: number;
     scoredPoints: number;
   };
+  addQuestion: (question: any) => void;
   animation?: string;
+  activeQuestion: any[];
 }
 
 const QuizSummary: FC<QuizSummaryProps> = ({
   quizziesInfo,
   animation = "false",
+  addQuestion,
+  activeQuestion,
 }) => {
   const [curPoints, setCurPoints] = useState(0);
   const [timeToAnswer, setTimeToAnswer] = useState(0);
@@ -58,17 +62,24 @@ const QuizSummary: FC<QuizSummaryProps> = ({
     }, 0) / quizziesInfo.questions.length;
 
   return (
-    <article className="quiz_container_quiz-summary--backdrop-filter">
+    <article
+      className="quiz_container_quiz-summary--backdrop-filter"
+      style={{
+        marginTop: `${
+          activeQuestion.length > 0 || animation === "true" ? "1rem" : "0rem"
+        }`,
+      }}
+    >
       <div className="quiz_container_quiz-summary">
         <span className="quiz_container_quiz-summary-points">
           {curPoints}/{quizziesInfo.questions.length}
         </span>
         <div className="quiz_container_quiz-summary_questions-container">
           {quizziesInfo.questions.map((el, index) => {
-            console.log(el.yourAnswer?.isTrue);
-
             return (
               <div
+                key={el.id}
+                onClick={() => addQuestion(el)}
                 className="quiz_container_quiz-summary_questions-container_item"
                 style={{
                   backgroundColor: `${
