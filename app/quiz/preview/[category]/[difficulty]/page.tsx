@@ -1,4 +1,4 @@
-import QuizPrevie from "../../../../../components/quiz/quiz-previe/quiz-previe";
+import QuizPrevie from "@/components/quiz/quiz-previe/quiz-previe";
 import { FC } from "react";
 
 interface ParamsSlug {
