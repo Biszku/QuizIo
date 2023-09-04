@@ -29,7 +29,7 @@ const QuizContent: FC<parametersProps> = async ({ parameters }) => {
     <section className="quiz_container">
       <SingleQuiz
         arrOfQuizzies={quiz}
-        info={{ category, difficult }}
+        params={{ category, difficult }}
         timeToAnswer={timeToAnswer}
       />
     </section>

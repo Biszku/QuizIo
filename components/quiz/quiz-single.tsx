@@ -8,7 +8,7 @@ import Quiz from "./quiz";
 interface ArrOfQuizziesProp {
   arrOfQuizzies: any[];
   timeToAnswer: number;
-  info: {
+  params: {
     category: string;
     difficult: string;
   };
@@ -16,13 +16,14 @@ interface ArrOfQuizziesProp {
 
 const SingleQuiz: FC<ArrOfQuizziesProp> = ({
   arrOfQuizzies,
-  info,
+  params,
   timeToAnswer,
 }) => {
   const { addQuiz, quizzes } = useContext(MainContext);
 
   const HistoryQuiz = quizzes.find(
-    (el) => el.category === info.category && el.difficulty === info.difficult
+    (el) =>
+      el.category === params.category && el.difficulty === params.difficult
   );
 
   const quizziesState = HistoryQuiz ? HistoryQuiz?.questions : arrOfQuizzies;
@@ -96,8 +97,8 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
     if (numOfcurQuiz === quizzies.length) clearInterval(timer);
 
     addQuiz({
-      category: info.category,
-      difficulty: info.difficult,
+      category: params.category,
+      difficulty: params.difficult,
       questions: quizzies,
       numOfQuestion: numOfcurQuiz,
       status: numOfcurQuiz === quizzies.length ? "finished" : "unfinished",
@@ -132,7 +133,7 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
   const addQuestionsPrevie = (question: any) => {
     setSummaryQuestionsPrevie((prev) => {
       if (prev.find((el) => el.id === question.id)) {
-        return prev.filter((el) => el.id !== question.id);
+        return prev;
       }
       return [question, ...prev];
     });
@@ -158,7 +159,6 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
             animation="true"
           />
           {summaryQuestionsPrevie.map((el, index) => {
-            console.log(el);
             return <p key={index}>{index}</p>;
           })}
         </>
