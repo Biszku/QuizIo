@@ -1,5 +1,5 @@
 "use client";
-import { useContext, FC } from "react";
+import { useContext, FC, useState } from "react";
 import Link from "next/link";
 import { HiArrowSmLeft } from "react-icons/hi";
 import StatusElement from "./quiz-info-status";
@@ -15,17 +15,32 @@ interface ParamsSlug {
 }
 const QuizInfo: FC<ParamsSlug> = ({ params }) => {
   const Context = useContext(MainContext);
+  const [summaryQuestionsPrevie, setSummaryQuestionsPrevie] = useState<any[]>(
+    []
+  );
 
   const curQuiz = Context.quizzes.find(
     (el) =>
       el.category === params.category && el.difficulty === params.difficulty
   );
 
+  const addQuestionsPrevie = (question: any) => {
+    setSummaryQuestionsPrevie((prev) => {
+      if (prev.find((el) => el.id === question.id)) {
+        return prev;
+      }
+      return [question, ...prev];
+    });
+  };
+
   return (
     <section
       className="my-quizzes-info"
       style={{
         backgroundImage: `linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(245, 246, 252, 0.73)),url(/mini-${params.category}.jpg)`,
+        justifyContent: `${
+          summaryQuestionsPrevie.length > 0 ? "flex-start" : "center"
+        }`,
       }}
     >
       {curQuiz?.status === "unfinished" && (
@@ -62,7 +77,17 @@ const QuizInfo: FC<ParamsSlug> = ({ params }) => {
         </>
       )}
       {curQuiz?.status === "finished" && (
-        <QuizSummary quizziesInfo={curQuiz} animation="false" />
+        <>
+          <QuizSummary
+            quizziesInfo={curQuiz}
+            animation="false"
+            addQuestion={addQuestionsPrevie}
+            activeQuestion={summaryQuestionsPrevie}
+          />
+          {summaryQuestionsPrevie.map((el, index) => {
+            return <p key={index}>{index}</p>;
+          })}
+        </>
       )}
     </section>
   );

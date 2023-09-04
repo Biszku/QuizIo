@@ -39,6 +39,9 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
   const [quizzies, setQuizzies] = useState(quizziesState);
   const [numOfcurQuiz, setNumOfcurQuiz] = useState(numOfcurQuizState);
   const [gameInfo, setGameInfo] = useState(gameInfoState);
+  const [summaryQuestionsPrevie, setSummaryQuestionsPrevie] = useState<any[]>(
+    []
+  );
 
   const arrOfAnswers: { answer: string; value: string }[] = [];
   const correctAnswer: any[] = [];
@@ -126,6 +129,15 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
     }
   }, [timeToAnswerState]);
 
+  const addQuestionsPrevie = (question: any) => {
+    setSummaryQuestionsPrevie((prev) => {
+      if (prev.find((el) => el.id === question.id)) {
+        return prev.filter((el) => el.id !== question.id);
+      }
+      return [question, ...prev];
+    });
+  };
+
   return (
     <>
       {numOfcurQuiz < quizzies.length && (
@@ -139,8 +151,16 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
       )}
       {numOfcurQuiz === quizzies.length && HistoryQuiz && (
         <>
-          <QuizSummary quizziesInfo={HistoryQuiz} animation="true" />
-          <p></p>
+          <QuizSummary
+            addQuestion={addQuestionsPrevie}
+            quizziesInfo={HistoryQuiz}
+            activeQuestion={summaryQuestionsPrevie}
+            animation="true"
+          />
+          {summaryQuestionsPrevie.map((el, index) => {
+            console.log(el);
+            return <p key={index}>{index}</p>;
+          })}
         </>
       )}
     </>
