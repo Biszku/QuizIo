@@ -19,6 +19,7 @@
         }
         &_text {
           font-size: 0.8rem;
+          user-select: none;
           width: max-content;
         }
       }
