@@ -1,10 +1,10 @@
-"use client";
 import { FC, useEffect, useState } from "react";
 import { ImStopwatch } from "react-icons/im";
 import { HiRefresh } from "react-icons/hi";
 import { useContext } from "react";
 import { MainContext } from "../../context/context";
 import Link from "next/link";
+import addIndexOfQuestionToState from "@/utils/showQuizPrevie";
 
 interface QuizSummaryProps {
   quizziesInfo: {
@@ -15,17 +15,17 @@ interface QuizSummaryProps {
     numOfQuestion: number;
     scoredPoints: number;
   };
-  addQuestion: (question: any) => void;
   animation?: string;
-  activeQuestion: any[];
+
+  addQuestion: (questionIndex: any) => void;
 }
 
 const QuizSummary: FC<QuizSummaryProps> = ({
   quizziesInfo,
   animation = "false",
   addQuestion,
-  activeQuestion,
 }) => {
+  console.log("Summary running!");
   const [curPoints, setCurPoints] = useState(0);
   const [timeToAnswer, setTimeToAnswer] = useState(0);
 
@@ -62,14 +62,7 @@ const QuizSummary: FC<QuizSummaryProps> = ({
     }, 0) / quizziesInfo.questions.length;
 
   return (
-    <article
-      className="quiz_container_quiz-summary--backdrop-filter"
-      style={{
-        marginTop: `${
-          activeQuestion.length > 0 || animation === "true" ? "1rem" : "0rem"
-        }`,
-      }}
-    >
+    <article className="quiz_container_quiz-summary--backdrop-filter">
       <div className="quiz_container_quiz-summary">
         <span className="quiz_container_quiz-summary-points">
           {curPoints}/{quizziesInfo.questions.length}
@@ -79,7 +72,7 @@ const QuizSummary: FC<QuizSummaryProps> = ({
             return (
               <div
                 key={el.id}
-                onClick={() => addQuestion(el)}
+                onClick={() => addIndexOfQuestionToState(addQuestion, index)}
                 className="quiz_container_quiz-summary_questions-container_item"
                 style={{
                   backgroundColor: `${
@@ -109,7 +102,7 @@ const QuizSummary: FC<QuizSummaryProps> = ({
               }}
             >
               <span className="quiz_container_quiz-summary_avg-time-container_avg-time-line-container-line-text">
-                {avg_time}
+                {`${avg_time.toFixed(2)}`}
               </span>
 
               <span className="quiz_container_quiz-summary_avg-time-container_avg-time-line-container-line-avg">
