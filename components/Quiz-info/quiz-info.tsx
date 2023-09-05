@@ -1,5 +1,5 @@
 "use client";
-import { useContext, FC, useState } from "react";
+import { useContext, FC, useState, useCallback } from "react";
 import Link from "next/link";
 import { HiArrowSmLeft } from "react-icons/hi";
 import StatusElement from "./quiz-info-status";
@@ -15,23 +15,14 @@ interface ParamsSlug {
 }
 const QuizInfo: FC<ParamsSlug> = ({ params }) => {
   const Context = useContext(MainContext);
-  const [summaryQuestionsPrevie, setSummaryQuestionsPrevie] = useState<any[]>(
-    []
-  );
+  const [summaryQuestionsPrevie, setSummaryQuestionsPrevie] = useState<
+    number[]
+  >([]);
 
   const curQuiz = Context.quizzes.find(
     (el) =>
       el.category === params.category && el.difficulty === params.difficulty
   );
-
-  const addQuestionsPrevie = (question: any) => {
-    setSummaryQuestionsPrevie((prev) => {
-      if (prev.find((el) => el.id === question.id)) {
-        return prev;
-      }
-      return [question, ...prev];
-    });
-  };
 
   return (
     <section
@@ -80,9 +71,7 @@ const QuizInfo: FC<ParamsSlug> = ({ params }) => {
         <>
           <QuizSummary
             quizziesInfo={curQuiz}
-            animation="false"
-            addQuestion={addQuestionsPrevie}
-            activeQuestion={summaryQuestionsPrevie}
+            addQuestion={setSummaryQuestionsPrevie}
           />
           {summaryQuestionsPrevie.map((el, index) => {
             return <p key={index}>{index}</p>;
