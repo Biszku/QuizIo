@@ -7,7 +7,9 @@ import { HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
 
 const MyQuizzesSection = () => {
   const [page, setPage] = useState(0);
+
   const { quizzes } = useContext(MainContext);
+
   const quizzesSplitInArray = [];
   for (let x = 0; x < quizzes.length; x += 6) {
     quizzesSplitInArray.push(quizzes.slice(x, x + 6));

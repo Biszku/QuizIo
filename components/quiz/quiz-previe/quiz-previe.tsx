@@ -13,7 +13,9 @@ interface ParamsSlug {
 const QuizPrevie: FC<ParamsSlug> = async ({ params }) => {
   const { category, difficulty } = params;
   const numOfQuestions = await GetQuzzies(category, difficulty);
+
   let timeToAnswer = 0;
+
   switch (params.difficulty) {
     case "easy":
       timeToAnswer = 10;
@@ -33,13 +35,6 @@ const QuizPrevie: FC<ParamsSlug> = async ({ params }) => {
           backgroundImage: ` linear-gradient(to right bottom, rgba(200, 200, 200, .3), rgba(200, 200, 200, .4)),url(/mini-${params.category}.jpg)`,
         }}
       >
-        {/* <Image
-        src={`/${params.category}.jpg`}
-        width={300}
-        height={400}
-        className="quiz-previe-container-background"
-        alt={params.category}
-      ></Image> */}
         <div className="quiz-previe-container_content">
           <p className="quiz-previe-container_content-category">
             {params.category}

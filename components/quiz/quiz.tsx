@@ -3,7 +3,7 @@ import { FC } from "react";
 interface ArrOfQuizziesProp {
   quizzies: any[];
   numOfcurQuiz: number;
-  timers: {
+  timers?: {
     timeToAnswer: number;
     timeToAnswerState: number;
   };
@@ -11,13 +11,16 @@ interface ArrOfQuizziesProp {
     answer: string;
     value: string;
   }[];
-  chooseAnswer: (answer: any) => void;
+  chooseAnswer?: (answer: any) => void;
 }
 
 const Quiz: FC<ArrOfQuizziesProp> = ({
   quizzies,
   numOfcurQuiz,
-  timers,
+  timers = {
+    timeToAnswer: 0,
+    timeToAnswerState: 0,
+  },
   chooseAnswer,
   arrOfAnswers,
 }) => {
@@ -66,7 +69,7 @@ const Quiz: FC<ArrOfQuizziesProp> = ({
               <button
                 key={index}
                 className="quiz_container_single-quiz_answers-box-btn btn"
-                onClick={() => chooseAnswer(el.answer)}
+                onClick={() => chooseAnswer && chooseAnswer(el.answer)}
                 style={{
                   fontSize:
                     curArray.find((el) => el.value.length > 50) ||
@@ -82,7 +85,7 @@ const Quiz: FC<ArrOfQuizziesProp> = ({
 
         <button
           className="quiz_container_single-quiz_answers-box-btn btn"
-          onClick={() => chooseAnswer("none")}
+          onClick={() => chooseAnswer && chooseAnswer("none")}
         >
           none
         </button>
