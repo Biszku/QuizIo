@@ -1,5 +1,5 @@
 "use client";
-import { useState, FC, useEffect } from "react";
+import { useState, FC, useEffect, useCallback } from "react";
 import { useContext } from "react";
 import { MainContext } from "../../context/context";
 import QuizSummary from "./quiz-summary";
@@ -59,35 +59,6 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
       correctAnswer.push(answerObj.slice(0, 8));
   }
 
-  const chooseAnswer = (answer: any) => {
-    let IsTrueAnswer = false;
-    if (
-      (chooseAnswer.length === 0 && answer === "none") ||
-      correctAnswer.includes(answer)
-    ) {
-      setGameInfo((prev) => ({ ...prev, points: prev.points + 1 }));
-      IsTrueAnswer = true;
-    }
-
-    setQuizzies((prev) =>
-      prev.map((el, index) => {
-        if (index === numOfcurQuiz)
-          return {
-            ...el,
-            yourAnswer: {
-              answer: answer,
-              isTrue: IsTrueAnswer,
-              answerTime: timeToAnswer - timeToAnswerState,
-            },
-          };
-
-        return el;
-      })
-    );
-    setNumOfcurQuiz((prev) => prev + 1);
-    setTimeToAnswerState(timeToAnswer);
-  };
-
   useEffect(() => {
     const timer = setInterval(
       () => setTimeToAnswerState((prev) => prev - 1),
@@ -130,14 +101,37 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
     }
   }, [timeToAnswerState]);
 
-  const addQuestionsPrevie = (question: any) => {
-    setSummaryQuestionsPrevie((prev) => {
-      if (prev.find((el) => el.id === question.id)) {
-        return prev;
+  const chooseAnswer = useCallback(
+    (answer: any) => {
+      let IsTrueAnswer = false;
+      if (
+        (correctAnswer.length === 0 && answer === "none") ||
+        correctAnswer.includes(answer)
+      ) {
+        setGameInfo((prev) => ({ ...prev, points: prev.points + 1 }));
+        IsTrueAnswer = true;
       }
-      return [question, ...prev];
-    });
-  };
+
+      setQuizzies((prev) =>
+        prev.map((el, index) => {
+          if (index === numOfcurQuiz)
+            return {
+              ...el,
+              yourAnswer: {
+                answer: answer,
+                isTrue: IsTrueAnswer,
+                answerTime: timeToAnswer - timeToAnswerState,
+              },
+            };
+
+          return el;
+        })
+      );
+      setNumOfcurQuiz((prev) => prev + 1);
+      setTimeToAnswerState(timeToAnswer);
+    },
+    [correctAnswer]
+  );
 
   return (
     <>
@@ -153,9 +147,8 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
       {numOfcurQuiz === quizzies.length && HistoryQuiz && (
         <>
           <QuizSummary
-            addQuestion={addQuestionsPrevie}
+            addQuestion={setSummaryQuestionsPrevie}
             quizziesInfo={HistoryQuiz}
-            activeQuestion={summaryQuestionsPrevie}
             animation="true"
           />
           {summaryQuestionsPrevie.map((el, index) => {
