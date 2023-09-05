@@ -1,4 +1,5 @@
 import { FC } from "react";
+import React from "react";
 
 interface ArrOfQuizziesProp {
   quizzies: any[];
@@ -94,4 +95,4 @@ const Quiz: FC<ArrOfQuizziesProp> = ({
   );
 };
 
-export default Quiz;
+export default React.memo(Quiz);

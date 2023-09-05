@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { ImStopwatch } from "react-icons/im";
 import { HiRefresh } from "react-icons/hi";
 import { useContext } from "react";
@@ -43,7 +43,9 @@ const QuizSummary: FC<QuizSummaryProps> = ({
         setTimeToAnswer(20);
         break;
     }
+  }, []);
 
+  useEffect(() => {
     if (animation === "true") {
       const PointAdded = setInterval(() => {
         if (curPoints < quizziesInfo.scoredPoints) {
@@ -143,4 +145,4 @@ const QuizSummary: FC<QuizSummaryProps> = ({
   );
 };
 
-export default QuizSummary;
+export default React.memo(QuizSummary);
