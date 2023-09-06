@@ -4,6 +4,7 @@ import { MainContext } from "../../context/context";
 import MyQuizzesItem from "./my-quizzes-item";
 import { useState } from "react";
 import { HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
+import { motion } from "framer-motion";
 
 const MyQuizzesSection = () => {
   const [page, setPage] = useState(0);
@@ -17,12 +18,20 @@ const MyQuizzesSection = () => {
 
   return (
     <section className="my-quizzes-container">
-      <div className="my-quizzes-container_grid">
+      <motion.div
+        className="my-quizzes-container_grid"
+        variants={{
+          visible: { transition: { staggerChildren: 0.05 } },
+          hidden: {},
+        }}
+        initial="hidden"
+        animate="visible"
+      >
         {quizzes.length > 0 &&
           quizzesSplitInArray[page].map((el, index) => (
             <MyQuizzesItem key={el.questions[0].id} el={el} index={index} />
           ))}
-      </div>
+      </motion.div>
       <div className="my-quizzes-container_pagination">
         <button
           className={`my-quizzes-container_pagination-decrease btn ${

@@ -68,9 +68,6 @@
     flex-direction: column;
     border-radius: 0.4rem;
     overflow: hidden;
-    opacity: 0;
-    animation: scaleUp 0.3s forwards;
-    backface-visibility: hidden;
 
     &-icon-link-to-info {
       position: absolute;
@@ -131,17 +128,4 @@
 
 .active-page {
   font-weight: bolder;
-}
-
-@keyframes scaleUp {
-  0% {
-    transform: scale(10%);
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-    transform: scale(100%);
-  }
 }

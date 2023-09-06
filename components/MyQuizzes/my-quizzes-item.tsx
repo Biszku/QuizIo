@@ -4,6 +4,7 @@ import { HiFastForward, HiRefresh } from "react-icons/hi";
 import { ImQuestion } from "react-icons/im";
 import { useContext } from "react";
 import { MainContext } from "../../context/context";
+import { motion } from "framer-motion";
 
 interface MyQuzziesProp {
   el: {
@@ -20,11 +21,13 @@ interface MyQuzziesProp {
 const MyQuizzesItem: FC<MyQuzziesProp> = ({ el, index }) => {
   const { delQuiz } = useContext(MainContext);
   return (
-    <div
-      className="my-quizzes-container_item"
-      style={{
-        animationDelay: `${0.1 * index}s`,
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, scale: 0.3 },
+        visible: { opacity: 1, scale: 1 },
       }}
+      transition={{ type: "tween" }}
+      className="my-quizzes-container_item"
     >
       <div
         className="my-quizzes-container_item_content"
@@ -73,7 +76,7 @@ const MyQuizzesItem: FC<MyQuzziesProp> = ({ el, index }) => {
       <Link href={`/my-quizzies/quiz-info/${el.category}/${el.difficulty}`}>
         <ImQuestion className="my-quizzes-container_item-icon-link-to-info" />
       </Link>
-    </div>
+    </motion.div>
   );
 };
 
