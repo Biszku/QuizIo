@@ -17,7 +17,7 @@ const StartQuizButton: FC<ParamsProps> = ({ params }) => {
       el.category === params.category && el.difficulty === params.difficulty
   );
   return (
-    <Link
+    <a
       className={`quiz-previe-container_content-button btn ${
         existingQuiz ? `disable--btn` : ``
       } `}
@@ -28,7 +28,7 @@ const StartQuizButton: FC<ParamsProps> = ({ params }) => {
       }`}
     >
       Start Quiz
-    </Link>
+    </a>
   );
 };
 
