@@ -4,6 +4,7 @@ import { HiRefresh } from "react-icons/hi";
 import { MainContext } from "../../context/context";
 import Link from "next/link";
 import addIndexOfQuestionToState from "@/utils/showQuizPrevie";
+import Loading from "../Loading/loading";
 
 interface QuizSummaryProps {
   quizziesInfo: {
@@ -63,84 +64,90 @@ const QuizSummary: FC<QuizSummaryProps> = ({
     }, 0) / quizziesInfo.questions.length;
 
   return (
-    <article className="quiz_container_quiz-summary--backdrop-filter">
-      <div className="quiz_container_quiz-summary">
-        <span className="quiz_container_quiz-summary-points">
-          {curPoints}/{quizziesInfo.questions.length}
-        </span>
-        <div className="quiz_container_quiz-summary_questions-container">
-          {quizziesInfo.questions.map((el, index) => {
-            return (
+    <>
+      {quizziesInfo.scoredPoints !== curPoints && animation === "false" && (
+        <Loading />
+      )}
+
+      <article className="quiz_container_quiz-summary--backdrop-filter">
+        <div className="quiz_container_quiz-summary">
+          <span className="quiz_container_quiz-summary-points">
+            {curPoints}/{quizziesInfo.questions.length}
+          </span>
+          <div className="quiz_container_quiz-summary_questions-container">
+            {quizziesInfo.questions.map((el, index) => {
+              return (
+                <div
+                  key={el.id}
+                  onClick={() => addIndexOfQuestionToState(addQuestion, index)}
+                  className="quiz_container_quiz-summary_questions-container_item"
+                  style={{
+                    backgroundColor: `${
+                      el.yourAnswer?.isTrue ? "#40c057" : "#fa5252"
+                    }`,
+                  }}
+                >
+                  {index + 1}
+                </div>
+              );
+            })}
+          </div>
+          <div className="quiz_container_quiz-summary_avg-time-container">
+            <ImStopwatch className="quiz_container_quiz-summary_avg-time-container-icon" />
+            <div className="quiz_container_quiz-summary_avg-time-container_avg-time-line-container">
               <div
-                key={el.id}
-                onClick={() => addIndexOfQuestionToState(addQuestion, index)}
-                className="quiz_container_quiz-summary_questions-container_item"
+                className="quiz_container_quiz-summary_avg-time-container_avg-time-line-container-line"
                 style={{
+                  width: `${(avg_time * 100) / timeToAnswer}%`,
                   backgroundColor: `${
-                    el.yourAnswer?.isTrue ? "#40c057" : "#fa5252"
+                    avg_time / timeToAnswer > 0.33
+                      ? avg_time / timeToAnswer > 0.66
+                        ? "red"
+                        : "orange"
+                      : "green"
                   }`,
                 }}
               >
-                {index + 1}
-              </div>
-            );
-          })}
-        </div>
-        <div className="quiz_container_quiz-summary_avg-time-container">
-          <ImStopwatch className="quiz_container_quiz-summary_avg-time-container-icon" />
-          <div className="quiz_container_quiz-summary_avg-time-container_avg-time-line-container">
-            <div
-              className="quiz_container_quiz-summary_avg-time-container_avg-time-line-container-line"
-              style={{
-                width: `${(avg_time * 100) / timeToAnswer}%`,
-                backgroundColor: `${
-                  avg_time / timeToAnswer > 0.33
-                    ? avg_time / timeToAnswer > 0.66
-                      ? "red"
-                      : "orange"
-                    : "green"
-                }`,
-              }}
-            >
-              <span className="quiz_container_quiz-summary_avg-time-container_avg-time-line-container-line-text">
-                {`${avg_time.toFixed(2)}`}
-              </span>
+                <span className="quiz_container_quiz-summary_avg-time-container_avg-time-line-container-line-text">
+                  {`${avg_time.toFixed(2)}`}
+                </span>
 
-              <span className="quiz_container_quiz-summary_avg-time-container_avg-time-line-container-line-avg">
-                avg time
-              </span>
+                <span className="quiz_container_quiz-summary_avg-time-container_avg-time-line-container-line-avg">
+                  avg time
+                </span>
+              </div>
             </div>
-          </div>
-          <span className="quiz_container_quiz-summary_avg-time-container-time-to-answer">
-            <span className="quiz_container_quiz-summary_avg-time-container-time-to-answer-number">
-              {`${timeToAnswer}`}
+            <span className="quiz_container_quiz-summary_avg-time-container-time-to-answer">
+              <span className="quiz_container_quiz-summary_avg-time-container-time-to-answer-number">
+                {`${timeToAnswer}`}
+              </span>
+              sec
             </span>
-            sec
-          </span>
+          </div>
+          <Link
+            href={`${
+              animation === `false`
+                ? `/quiz/${quizziesInfo.category}/${quizziesInfo.difficulty}`
+                : `/`
+            }`}
+            className="quiz_container_quiz-summary-btn btn"
+            onClick={() => {
+              if (animation === "false")
+                delQuiz(quizziesInfo.category, quizziesInfo.difficulty);
+            }}
+          >
+            {animation === "false" ? (
+              <>
+                Try Again
+                <HiRefresh />
+              </>
+            ) : (
+              `Finish`
+            )}
+          </Link>
         </div>
-        <Link
-          href={`${
-            animation === `false`
-              ? `/quiz/${quizziesInfo.category}/${quizziesInfo.difficulty}`
-              : `/`
-          }`}
-          className="quiz_container_quiz-summary-btn btn"
-          onClick={() => {
-            if (animation === "false")
-              delQuiz(quizziesInfo.category, quizziesInfo.difficulty);
-          }}
-        >
-          {animation === "false" ? (
-            <>
-              Try Again
-              <HiRefresh />
-            </>
-          ) : (
-            `Finish`
-          )}
-        </Link>
-      </div>
-    </article>
+      </article>
+    </>
   );
 };
 

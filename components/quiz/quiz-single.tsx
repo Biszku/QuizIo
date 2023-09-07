@@ -5,6 +5,7 @@ import QuizSummary from "./quiz-summary";
 import Quiz from "./quiz";
 import GetQuzzies from "../../utils/getQuzzies";
 import { useQuery } from "@tanstack/react-query";
+import Loading from "../Loading/loading";
 
 interface ArrOfQuizziesProp {
   timeToAnswer: number;
@@ -157,6 +158,7 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ params, timeToAnswer }) => {
 
   return (
     <>
+      {isLoading && <Loading />}
       {numOfcurQuiz < quizzies.length && quizzies[1] !== undefined && (
         <Quiz
           quizzies={quizzies}
