@@ -1,11 +1,13 @@
+"use client";
 import "@/styles/main.scss";
 import MainContextProvider from "@/context/context";
 import type { Metadata } from "next";
 import { FC } from "react";
 import Footer from "@/components/Footer/footer";
-import MainNav from "@/components/Navigation/navigation";
 import Header from "@/components/Header/header";
 import { Poppins } from "@next/font/google";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const poppins = Poppins({
   subsets: ["devanagari"],
@@ -18,20 +20,22 @@ export const metadata: Metadata = {
 };
 
 const RootLayout: FC<{ children: React.ReactNode }> = ({ children }) => {
+  const queryClient = new QueryClient();
   return (
-    <html lang="en">
-      <MainContextProvider>
-        <body className={poppins.className}>
-          <Header />
-          <main className="main-container">
-            <div id="portal"></div>
-            {children}
-
-            <Footer />
-          </main>
-        </body>
-      </MainContextProvider>
-    </html>
+    <QueryClientProvider client={queryClient}>
+      <html lang="en">
+        <MainContextProvider>
+          <body className={poppins.className}>
+            <Header />
+            <main className="main-container">
+              <div id="portal"></div>
+              {children}
+              <Footer />
+            </main>
+          </body>
+        </MainContextProvider>
+      </html>
+    </QueryClientProvider>
   );
 };
 
