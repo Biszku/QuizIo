@@ -1,12 +1,12 @@
 "use client";
-import { useState, FC, useEffect, useCallback } from "react";
-import { useContext } from "react";
+import { useState, FC, useEffect, useCallback, useContext } from "react";
 import { MainContext } from "../../context/context";
 import QuizSummary from "./quiz-summary";
 import Quiz from "./quiz";
+import GetQuzzies from "../../utils/getQuzzies";
+import { useQuery } from "@tanstack/react-query";
 
 interface ArrOfQuizziesProp {
-  arrOfQuizzies: any[];
   timeToAnswer: number;
   params: {
     category: string;
@@ -14,11 +14,7 @@ interface ArrOfQuizziesProp {
   };
 }
 
-const SingleQuiz: FC<ArrOfQuizziesProp> = ({
-  arrOfQuizzies,
-  params,
-  timeToAnswer,
-}) => {
+const SingleQuiz: FC<ArrOfQuizziesProp> = ({ params, timeToAnswer }) => {
   const { addQuiz, quizzes } = useContext(MainContext);
 
   const HistoryQuiz = quizzes.find(
@@ -26,7 +22,13 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
       el.category === params.category && el.difficulty === params.difficult
   );
 
-  const quizziesState = HistoryQuiz ? HistoryQuiz?.questions : arrOfQuizzies;
+  console.log(HistoryQuiz);
+
+  const quizziesState =
+    HistoryQuiz && HistoryQuiz?.questions[0] !== undefined
+      ? HistoryQuiz.questions
+      : [undefined];
+
   const numOfcurQuizState = HistoryQuiz ? HistoryQuiz?.numOfQuestion : 0;
   const gameInfoState = HistoryQuiz
     ? {
@@ -37,7 +39,7 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
       };
 
   const [timeToAnswerState, setTimeToAnswerState] = useState(timeToAnswer);
-  const [quizzies, setQuizzies] = useState(quizziesState);
+  const [quizzies, setQuizzies] = useState<any[]>(quizziesState);
   const [numOfcurQuiz, setNumOfcurQuiz] = useState(numOfcurQuizState);
   const [gameInfo, setGameInfo] = useState(gameInfoState);
   const [summaryQuestionsPrevie, setSummaryQuestionsPrevie] = useState<any[]>(
@@ -47,16 +49,34 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
   const arrOfAnswers: { answer: string; value: string }[] = [];
   const correctAnswer: any[] = [];
 
-  for (const aliasToAnswer in quizzies[numOfcurQuiz]?.answers) {
-    arrOfAnswers.push({
-      answer: aliasToAnswer,
-      value: quizzies[numOfcurQuiz]?.answers[aliasToAnswer],
-    });
-  }
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["quizzes"],
+    queryFn: ({ signal }: any) =>
+      GetQuzzies({
+        category: params.category,
+        difficulty: params.difficult,
+        signal,
+      }),
+  });
 
-  for (const answerObj in quizzies[numOfcurQuiz]?.correct_answers) {
-    if (quizzies[numOfcurQuiz].correct_answers[answerObj] === "true")
-      correctAnswer.push(answerObj.slice(0, 8));
+  useEffect(() => {
+    if (data && quizzies[0] === undefined) {
+      setQuizzies(data);
+    }
+  }, [data]);
+
+  if (quizzies) {
+    for (const aliasToAnswer in quizzies[numOfcurQuiz]?.answers) {
+      arrOfAnswers.push({
+        answer: aliasToAnswer,
+        value: quizzies[numOfcurQuiz]?.answers[aliasToAnswer],
+      });
+    }
+
+    for (const answerObj in quizzies[numOfcurQuiz]?.correct_answers) {
+      if (quizzies[numOfcurQuiz].correct_answers[answerObj] === "true")
+        correctAnswer.push(answerObj.slice(0, 8));
+    }
   }
 
   useEffect(() => {
@@ -64,40 +84,42 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
       () => setTimeToAnswerState((prev) => prev - 1),
       1000
     );
+    if (quizzies) {
+      if (numOfcurQuiz === quizzies.length) clearInterval(timer);
 
-    if (numOfcurQuiz === quizzies.length) clearInterval(timer);
-
-    addQuiz({
-      category: params.category,
-      difficulty: params.difficult,
-      questions: quizzies,
-      numOfQuestion: numOfcurQuiz,
-      status: numOfcurQuiz === quizzies.length ? "finished" : "unfinished",
-      scoredPoints: gameInfo.points,
-    });
-
+      addQuiz({
+        category: params.category,
+        difficulty: params.difficult,
+        questions: quizzies,
+        numOfQuestion: numOfcurQuiz,
+        status: numOfcurQuiz === quizzies.length ? "finished" : "unfinished",
+        scoredPoints: gameInfo.points,
+      });
+    }
     return () => clearInterval(timer);
   }, [numOfcurQuiz]);
 
   useEffect(() => {
-    if (timeToAnswerState < 0) {
-      setQuizzies((prev) =>
-        prev.map((el, index) => {
-          if (index === numOfcurQuiz)
-            return {
-              ...el,
-              yourAnswer: {
-                answer: null,
-                isTrue: false,
-                answerTime: timeToAnswer,
-              },
-            };
+    if (quizzies) {
+      if (timeToAnswerState < 0) {
+        setQuizzies((prev) =>
+          prev.map((el, index) => {
+            if (index === numOfcurQuiz)
+              return {
+                ...el,
+                yourAnswer: {
+                  answer: null,
+                  isTrue: false,
+                  answerTime: timeToAnswer,
+                },
+              };
 
-          return el;
-        })
-      );
-      setNumOfcurQuiz((prev) => prev + 1);
-      setTimeToAnswerState(timeToAnswer);
+            return el;
+          })
+        );
+        setNumOfcurQuiz((prev) => prev + 1);
+        setTimeToAnswerState(timeToAnswer);
+      }
     }
   }, [timeToAnswerState]);
 
@@ -135,7 +157,7 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
 
   return (
     <>
-      {numOfcurQuiz < quizzies.length && (
+      {numOfcurQuiz < quizzies.length && quizzies[1] !== undefined && (
         <Quiz
           quizzies={quizzies}
           numOfcurQuiz={numOfcurQuiz}
@@ -144,18 +166,21 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({
           arrOfAnswers={arrOfAnswers}
         />
       )}
-      {numOfcurQuiz === quizzies.length && HistoryQuiz && (
-        <>
-          <QuizSummary
-            addQuestion={setSummaryQuestionsPrevie}
-            quizziesInfo={HistoryQuiz}
-            animation="true"
-          />
-          {summaryQuestionsPrevie.map((el, index) => {
-            return <p key={index}>{index}</p>;
-          })}
-        </>
-      )}
+      {quizzies[1] !== undefined &&
+        numOfcurQuiz === quizzies.length &&
+        HistoryQuiz && (
+          <>
+            <QuizSummary
+              addQuestion={setSummaryQuestionsPrevie}
+              quizziesInfo={HistoryQuiz}
+              animation="true"
+            />
+
+            {summaryQuestionsPrevie.map((el, index) => {
+              return <p key={index}>{index}</p>;
+            })}
+          </>
+        )}
     </>
   );
 };
