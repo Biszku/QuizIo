@@ -1,7 +1,6 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState, useContext } from "react";
 import { ImStopwatch } from "react-icons/im";
 import { HiRefresh } from "react-icons/hi";
-import { useContext } from "react";
 import { MainContext } from "../../context/context";
 import Link from "next/link";
 import addIndexOfQuestionToState from "@/utils/showQuizPrevie";
