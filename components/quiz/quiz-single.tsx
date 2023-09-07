@@ -97,7 +97,7 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ params, timeToAnswer }) => {
       });
     }
     return () => clearInterval(timer);
-  }, [numOfcurQuiz]);
+  }, [numOfcurQuiz, quizzies]);
 
   useEffect(() => {
     if (quizzies) {
