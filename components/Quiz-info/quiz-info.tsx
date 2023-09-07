@@ -6,6 +6,9 @@ import StatusElement from "./quiz-info-status";
 import InfoContainer from "./quiz-info-container";
 import { MainContext } from "../../context/context";
 import QuizSummary from "../quiz/quiz-summary";
+import Quiz from "../quiz/quiz";
+import getArrOfAnswers from "@/utils/getArrayOfAnswers";
+import getCorrectAnswers from "@/utils/getCorrectAnswers";
 
 interface ParamsSlug {
   params: {
@@ -29,9 +32,6 @@ const QuizInfo: FC<ParamsSlug> = ({ params }) => {
       className="my-quizzes-info"
       style={{
         backgroundImage: `linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(245, 246, 252, 0.73)),url(/mini-${params.category}.jpg)`,
-        justifyContent: `${
-          summaryQuestionsPrevie.length > 0 ? "flex-start" : "center"
-        }`,
       }}
     >
       {curQuiz?.status === "unfinished" && (
@@ -74,7 +74,16 @@ const QuizInfo: FC<ParamsSlug> = ({ params }) => {
             addQuestion={setSummaryQuestionsPrevie}
           />
           {summaryQuestionsPrevie.map((el, index) => {
-            return <p key={index}>{index}</p>;
+            return (
+              <Quiz
+                key={index}
+                quizzies={curQuiz.questions}
+                numOfcurQuiz={el}
+                arrOfAnswers={getArrOfAnswers(curQuiz.questions, el)}
+                summary={true}
+                corAnswer={getCorrectAnswers(curQuiz.questions, el)}
+              />
+            );
           })}
         </>
       )}

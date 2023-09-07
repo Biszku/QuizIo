@@ -6,6 +6,8 @@ import Quiz from "./quiz";
 import GetQuzzies from "../../utils/getQuzzies";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../Loading/loading";
+import getArrOfAnswers from "@/utils/getArrayOfAnswers";
+import getCorrectAnswers from "@/utils/getCorrectAnswers";
 
 interface ArrOfQuizziesProp {
   timeToAnswer: number;
@@ -22,8 +24,6 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ params, timeToAnswer }) => {
     (el) =>
       el.category === params.category && el.difficulty === params.difficult
   );
-
-  console.log(HistoryQuiz);
 
   const quizziesState =
     HistoryQuiz && HistoryQuiz?.questions[0] !== undefined
@@ -47,9 +47,6 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ params, timeToAnswer }) => {
     []
   );
 
-  const arrOfAnswers: { answer: string; value: string }[] = [];
-  const correctAnswer: any[] = [];
-
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["quizzes"],
     queryFn: ({ signal }: any) =>
@@ -60,25 +57,13 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ params, timeToAnswer }) => {
       }),
   });
 
+  const correctAnswer = getCorrectAnswers(quizzies, numOfcurQuiz);
+
   useEffect(() => {
     if (data && quizzies[0] === undefined) {
       setQuizzies(data);
     }
   }, [data]);
-
-  if (quizzies) {
-    for (const aliasToAnswer in quizzies[numOfcurQuiz]?.answers) {
-      arrOfAnswers.push({
-        answer: aliasToAnswer,
-        value: quizzies[numOfcurQuiz]?.answers[aliasToAnswer],
-      });
-    }
-
-    for (const answerObj in quizzies[numOfcurQuiz]?.correct_answers) {
-      if (quizzies[numOfcurQuiz].correct_answers[answerObj] === "true")
-        correctAnswer.push(answerObj.slice(0, 8));
-    }
-  }
 
   useEffect(() => {
     const timer = setInterval(
@@ -165,7 +150,7 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ params, timeToAnswer }) => {
           numOfcurQuiz={numOfcurQuiz}
           timers={{ timeToAnswer, timeToAnswerState }}
           chooseAnswer={chooseAnswer}
-          arrOfAnswers={arrOfAnswers}
+          arrOfAnswers={getArrOfAnswers(quizzies, numOfcurQuiz)}
         />
       )}
       {quizzies[1] !== undefined &&
@@ -179,7 +164,16 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ params, timeToAnswer }) => {
             />
 
             {summaryQuestionsPrevie.map((el, index) => {
-              return <p key={index}>{index}</p>;
+              return (
+                <Quiz
+                  key={index}
+                  quizzies={HistoryQuiz.questions}
+                  numOfcurQuiz={el}
+                  arrOfAnswers={getArrOfAnswers(HistoryQuiz.questions, el)}
+                  summary={true}
+                  corAnswer={getCorrectAnswers(HistoryQuiz.questions, el)}
+                />
+              );
             })}
           </>
         )}
