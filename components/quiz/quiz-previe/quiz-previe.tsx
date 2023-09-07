@@ -12,7 +12,7 @@ interface ParamsSlug {
 
 const QuizPrevie: FC<ParamsSlug> = async ({ params }) => {
   const { category, difficulty } = params;
-  const numOfQuestions = await GetQuzzies(category, difficulty);
+  const numOfQuestions = await GetQuzzies({ category, difficulty });
 
   let timeToAnswer = 0;
 
