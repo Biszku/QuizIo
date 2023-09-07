@@ -1,4 +1,3 @@
-import GetQuzzies from "../../utils/getQuzzies";
 import { FC } from "react";
 import SingleQuiz from "./quiz-single";
 
@@ -10,7 +9,6 @@ interface parametersProps {
 
 const QuizContent: FC<parametersProps> = async ({ parameters }) => {
   const [category, difficult] = parameters.quiz;
-  const quiz = await GetQuzzies(category, difficult);
 
   let timeToAnswer = 0;
   switch (difficult) {
@@ -28,7 +26,6 @@ const QuizContent: FC<parametersProps> = async ({ parameters }) => {
   return (
     <section className="quiz_container">
       <SingleQuiz
-        arrOfQuizzies={quiz}
         params={{ category, difficult }}
         timeToAnswer={timeToAnswer}
       />
