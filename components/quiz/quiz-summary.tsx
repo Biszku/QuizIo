@@ -16,7 +16,6 @@ interface QuizSummaryProps {
     scoredPoints: number;
   };
   animation?: string;
-
   addQuestion: (questionIndex: any) => void;
 }
 
@@ -25,7 +24,6 @@ const QuizSummary: FC<QuizSummaryProps> = ({
   animation = "false",
   addQuestion,
 }) => {
-  console.log("Summary running!");
   const [curPoints, setCurPoints] = useState(0);
   const [timeToAnswer, setTimeToAnswer] = useState(0);
 
