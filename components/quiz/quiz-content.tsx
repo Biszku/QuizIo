@@ -1,5 +1,7 @@
-import { FC } from "react";
+"use client";
+import { FC, useEffect, useState } from "react";
 import SingleQuiz from "./quiz-single";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 interface parametersProps {
   parameters: {
@@ -7,29 +9,42 @@ interface parametersProps {
   };
 }
 
-const QuizContent: FC<parametersProps> = async ({ parameters }) => {
+const QuizContent: FC<parametersProps> = ({ parameters }) => {
+  const queryClient = new QueryClient();
+  const [timeToAnswer, setTimeToAnswer] = useState(0);
   const [category, difficult] = parameters.quiz;
 
-  let timeToAnswer = 0;
-  switch (difficult) {
-    case "easy":
-      timeToAnswer = 10;
-      break;
-    case "medium":
-      timeToAnswer = 15;
-      break;
-    case "hard":
-      timeToAnswer = 20;
-      break;
-  }
+  // let timeToAnswer = 0;
+  useEffect(() => {
+    switch (difficult) {
+      case "easy":
+        // timeToAnswer = 10;
+        setTimeToAnswer(10);
+        break;
+      case "medium":
+        // timeToAnswer = 15;
+        setTimeToAnswer(15);
+
+        break;
+      case "hard":
+        // timeToAnswer = 20;
+        setTimeToAnswer(20);
+
+        break;
+    }
+  }, []);
 
   return (
-    <section className="quiz_container">
-      <SingleQuiz
-        params={{ category, difficult }}
-        timeToAnswer={timeToAnswer}
-      />
-    </section>
+    <QueryClientProvider client={queryClient}>
+      <section className="quiz_container">
+        {timeToAnswer && (
+          <SingleQuiz
+            params={{ category, difficult }}
+            timeToAnswer={timeToAnswer}
+          />
+        )}
+      </section>
+    </QueryClientProvider>
   );
 };
 
