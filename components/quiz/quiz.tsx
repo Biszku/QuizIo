@@ -54,9 +54,7 @@ const Quiz: FC<ArrOfQuizziesProp> = ({
           className="quiz_container_single-quiz_question-box--question"
           style={{
             fontSize:
-              quizzies[numOfcurQuiz].question.length > 100
-                ? "0.8rem"
-                : "0.9rem",
+              quizzies[numOfcurQuiz].question.length > 100 ? "0.9rem" : "1rem",
           }}
         >
           {quizzies[numOfcurQuiz].question}
@@ -75,8 +73,8 @@ const Quiz: FC<ArrOfQuizziesProp> = ({
                   fontSize:
                     curArray.find((el) => el.value.length > 50) ||
                     curArray.length > 5
-                      ? "0.7rem"
-                      : "0.8rem",
+                      ? "0.8rem"
+                      : "0.9rem",
                 }}
               >
                 {el.value}
