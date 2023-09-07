@@ -37,7 +37,7 @@ const QuizContent: FC<parametersProps> = ({ parameters }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <section className="quiz_container">
-        {timeToAnswer && (
+        {timeToAnswer > 0 && (
           <SingleQuiz
             params={{ category, difficult }}
             timeToAnswer={timeToAnswer}
