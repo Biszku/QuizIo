@@ -5,7 +5,7 @@ const addIndexOfQuestionToState = (
   questionIndex: number
 ) => {
   updateFunc((prev) => {
-    if (prev.find((el) => el === questionIndex)) {
+    if (prev.find((el) => el === questionIndex) !== undefined) {
       return prev;
     }
     return [questionIndex, ...prev];
