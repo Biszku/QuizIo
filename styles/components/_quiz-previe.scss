@@ -7,6 +7,28 @@
 
   position: relative;
 
+  &-link-to-myquizzes {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    font-size: 0.8rem;
+    border-bottom: 0.1rem solid black;
+    padding-bottom: 0.2rem;
+    transition: all 0.3s;
+
+    &:hover {
+      border-bottom: 0.1rem solid transparent;
+      & svg {
+        transform: translateX(0.1rem);
+      }
+    }
+
+    & svg {
+      font-size: 1.2rem;
+      transition: all 0.3s;
+    }
+  }
+
   &--backdrop-filter {
     height: 80%;
     width: 85%;
@@ -32,6 +54,13 @@
     transform: translate(-50%, -50%);
 
     z-index: 1;
+
+    &_button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
 
     &-category {
       font-size: 2.8rem;
@@ -69,6 +98,8 @@
     }
 
     &-button {
+      padding: 0.4rem 1rem;
+      font-size: 1.6rem;
       background-color: #ff922b;
     }
   }
