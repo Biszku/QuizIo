@@ -21,7 +21,7 @@ const MyQuizzesSection = () => {
       <motion.div
         className="my-quizzes-container_grid"
         variants={{
-          visible: { transition: { staggerChildren: 0.05 } },
+          visible: { transition: { staggerChildren: 0.1 } },
           hidden: {},
         }}
         initial="hidden"
