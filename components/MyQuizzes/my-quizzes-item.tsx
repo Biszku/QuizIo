@@ -24,10 +24,10 @@ const MyQuizzesItem: FC<MyQuzziesProp> = ({ el, index }) => {
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0, scale: 0.3 },
+        hidden: { opacity: 0, scale: 0.8 },
         visible: { opacity: 1, scale: 1 },
       }}
-      transition={{ type: "tween" }}
+      transition={{ type: "spring" }}
       className="my-quizzes-container_item"
     >
       <div
