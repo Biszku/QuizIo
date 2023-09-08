@@ -67,6 +67,8 @@ const QuizSummary: FC<QuizSummaryProps> = ({
         <Loading />
       )}
 
+      {!timeToAnswer && animation === "true" && <Loading />}
+
       <article className="quiz_container_quiz-summary--backdrop-filter">
         <div className="quiz_container_quiz-summary">
           <span className="quiz_container_quiz-summary-points">
