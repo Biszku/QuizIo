@@ -7,7 +7,7 @@ interface MainContextData {
         category: string;
         difficulty: string;
         status: string;
-        questions: unknown[];
+        questions: any[];
         numOfQuestion: number;
         scoredPoints: number;
       }[]
