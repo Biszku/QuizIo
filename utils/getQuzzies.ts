@@ -11,7 +11,7 @@ const GetQuzzies = async ({
 }) => {
   const req = await fetch(
     `https://quizapi.io/api/v1/questions?apiKey=${
-      process.env.NEXT_PUBLIC_API_KEY
+      process.env.API_KEY
     }&category=${
       category === "random" ? "" : category
     }&difficulty=${difficulty}&limit=${limit}`,
