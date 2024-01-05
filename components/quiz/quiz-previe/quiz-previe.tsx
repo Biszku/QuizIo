@@ -12,7 +12,7 @@ interface ParamsSlug {
 
 const QuizPrevie: FC<ParamsSlug> = async ({ params }) => {
   const { category, difficulty } = params;
-  const numOfQuestions = await GetQuzzies({ category, difficulty });
+  const questionsObj = await GetQuzzies({ category, difficulty });
 
   let timeToAnswer = 0;
 
@@ -62,14 +62,15 @@ const QuizPrevie: FC<ParamsSlug> = async ({ params }) => {
                 number of questions:
               </span>
               <span className="quiz-previe-container_content-list-item-param">
-                {numOfQuestions.length === 0 ? "0" : numOfQuestions.length}
+                {questionsObj.length === 0 ? "0" : questionsObj.length}
               </span>
             </li>
           </ul>
           <StartQuizButton
-            params={{
+            data={{
               category: params.category,
               difficulty: params.difficulty,
+              questionsObj,
             }}
           />
         </div>

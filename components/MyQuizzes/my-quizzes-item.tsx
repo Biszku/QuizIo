@@ -47,7 +47,11 @@ const MyQuizzesItem: FC<MyQuzziesProp> = ({ el, index }) => {
       </div>
       <div className="my-quizzes-container_item_action-container">
         <Link
-          href={`/quiz/${el.category}/${el.difficulty}`}
+          href={`${
+            el.status === "finished"
+              ? `/quiz/preview/${el.category}/${el.difficulty}`
+              : `/quiz/${el.category}/${el.difficulty}`
+          }`}
           className="my-quizzes-container_item_action-container-link"
           style={{
             backgroundColor: `${

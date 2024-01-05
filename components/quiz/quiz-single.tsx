@@ -3,9 +3,6 @@ import { useState, FC, useEffect, useCallback, useContext } from "react";
 import { MainContext } from "../../context/context";
 import QuizSummary from "./quiz-summary";
 import Quiz from "./quiz";
-import GetQuzzies from "../../utils/getQuzzies";
-import { useQuery } from "@tanstack/react-query";
-import Loading from "../Loading/loading";
 import getArrOfAnswers from "@/utils/getArrayOfAnswers";
 import getCorrectAnswers from "@/utils/getCorrectAnswers";
 
@@ -19,6 +16,7 @@ interface ArrOfQuizziesProp {
 
 const SingleQuiz: FC<ArrOfQuizziesProp> = ({ params, timeToAnswer }) => {
   const { addQuiz, quizzes } = useContext(MainContext);
+  console.log(quizzes);
 
   const HistoryQuiz = quizzes.find(
     (el) =>
@@ -47,23 +45,7 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ params, timeToAnswer }) => {
     []
   );
 
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["quizzes"],
-    queryFn: ({ signal }: any) =>
-      GetQuzzies({
-        category: params.category,
-        difficulty: params.difficult,
-        signal,
-      }),
-  });
-
   const correctAnswer = getCorrectAnswers(quizzies, numOfcurQuiz);
-
-  useEffect(() => {
-    if (data && quizzies[0] === undefined) {
-      setQuizzies(data);
-    }
-  }, [data]);
 
   useEffect(() => {
     const timer = setInterval(
@@ -143,7 +125,6 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ params, timeToAnswer }) => {
 
   return (
     <>
-      {isLoading && <Loading />}
       {numOfcurQuiz < quizzies.length && quizzies[1] !== undefined && (
         <Quiz
           quizzies={quizzies}

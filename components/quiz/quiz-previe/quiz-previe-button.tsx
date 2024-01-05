@@ -5,28 +5,46 @@ import { FC, useContext } from "react";
 import { MainContext } from "../../../context/context";
 
 interface ParamsProps {
-  params: {
+  data: {
     category: string;
     difficulty: string;
+    questionsObj: unknown[];
   };
 }
 
-const StartQuizButton: FC<ParamsProps> = ({ params }) => {
-  const { quizzes } = useContext(MainContext);
+const StartQuizButton: FC<ParamsProps> = ({ data }) => {
+  const { quizzes, addQuiz } = useContext(MainContext);
+  console.log(quizzes, data.questionsObj);
   const existingQuiz = quizzes.find(
-    (el) =>
-      el.category === params.category && el.difficulty === params.difficulty
+    (el) => el.category === data.category && el.difficulty === data.difficulty
   );
+
+  const handleQuestions = () => {
+    console.log("Clicked!");
+    if (!existingQuiz) {
+      console.log("Adding");
+      addQuiz({
+        category: data.category,
+        difficulty: data.difficulty,
+        questions: data.questionsObj,
+        numOfQuestion: 0,
+        status: "unfinished",
+        scoredPoints: 0,
+      });
+    }
+  };
+
   return (
     <div className="quiz-previe-container_content_button-container">
       <Link
+        onClick={() => handleQuestions()}
         className={`quiz-previe-container_content-button btn ${
           existingQuiz ? `disable--btn` : ``
         } `}
         href={`${
           existingQuiz
-            ? `/quiz/preview/${params.category}/${params.difficulty}`
-            : `/quiz/${params.category}/${params.difficulty}`
+            ? `/quiz/preview/${data.category}/${data.difficulty}`
+            : `/quiz/${data.category}/${data.difficulty}`
         }`}
       >
         Start Quiz

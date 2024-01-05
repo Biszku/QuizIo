@@ -7,7 +7,7 @@ interface MainContextData {
         category: string;
         difficulty: string;
         status: string;
-        questions: any[];
+        questions: unknown[];
         numOfQuestion: number;
         scoredPoints: number;
       }[]
@@ -21,7 +21,7 @@ interface MainContextData {
     category: string;
     difficulty: string;
     status: string;
-    questions: any[];
+    questions: unknown[];
     numOfQuestion: number;
     scoredPoints: number;
   }) => void;
@@ -30,7 +30,6 @@ interface MainContextData {
 
 export const MainContext = createContext<MainContextData>({
   quizzes: [],
-
   currentCategory: [""],
   visibilityOfCategoryList: false,
   setCurCat: () => {},
@@ -47,7 +46,7 @@ const MainContextProvider: FC<{ children: React.ReactNode }> = ({
       category: string;
       difficulty: string;
       status: string;
-      questions: any[];
+      questions: unknown[];
       numOfQuestion: number;
       scoredPoints: number;
     }[]
@@ -74,7 +73,7 @@ const MainContextProvider: FC<{ children: React.ReactNode }> = ({
     category: string;
     difficulty: string;
     status: string;
-    questions: any[];
+    questions: unknown[];
     numOfQuestion: number;
     scoredPoints: number;
   }) =>
