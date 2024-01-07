@@ -14,15 +14,12 @@ interface ParamsProps {
 
 const StartQuizButton: FC<ParamsProps> = ({ data }) => {
   const { quizzes, addQuiz } = useContext(MainContext);
-  console.log(quizzes, data.questionsObj);
   const existingQuiz = quizzes.find(
     (el) => el.category === data.category && el.difficulty === data.difficulty
   );
 
   const handleQuestions = () => {
-    console.log("Clicked!");
     if (!existingQuiz) {
-      console.log("Adding");
       addQuiz({
         category: data.category,
         difficulty: data.difficulty,

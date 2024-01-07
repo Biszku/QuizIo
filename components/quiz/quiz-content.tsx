@@ -1,16 +1,14 @@
 "use client";
-import { FC, useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import SingleQuiz from "./quiz-single";
 
-interface parametersProps {
-  parameters: {
-    quiz: string[];
-  };
-}
+const QuizContent = () => {
+  const pathname = usePathname();
+  const quizInfo = pathname.split("/").slice(2);
 
-const QuizContent: FC<parametersProps> = ({ parameters }) => {
   const [timeToAnswer, setTimeToAnswer] = useState(0);
-  const [category, difficult] = parameters.quiz;
+  const [category, difficult] = quizInfo;
 
   useEffect(() => {
     switch (difficult) {

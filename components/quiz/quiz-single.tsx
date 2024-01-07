@@ -16,7 +16,6 @@ interface ArrOfQuizziesProp {
 
 const SingleQuiz: FC<ArrOfQuizziesProp> = ({ params, timeToAnswer }) => {
   const { addQuiz, quizzes } = useContext(MainContext);
-  console.log(quizzes);
 
   const HistoryQuiz = quizzes.find(
     (el) =>
@@ -24,11 +23,11 @@ const SingleQuiz: FC<ArrOfQuizziesProp> = ({ params, timeToAnswer }) => {
   );
 
   const quizziesState =
-    HistoryQuiz && HistoryQuiz?.questions[0] !== undefined
+    HistoryQuiz && HistoryQuiz.questions[0] !== undefined
       ? HistoryQuiz.questions
       : [undefined];
 
-  const numOfcurQuizState = HistoryQuiz ? HistoryQuiz?.numOfQuestion : 0;
+  const numOfcurQuizState = HistoryQuiz ? HistoryQuiz.numOfQuestion : 0;
   const gameInfoState = HistoryQuiz
     ? {
         points: HistoryQuiz?.scoredPoints,
