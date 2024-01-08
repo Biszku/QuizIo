@@ -32,7 +32,7 @@
   &--backdrop-filter {
     height: 80%;
     width: 85%;
-    backdrop-filter: blur(0.2rem);
+    backdrop-filter: blur(0.5rem);
   }
 
   &_content {
@@ -64,6 +64,7 @@
 
     &-category {
       font-size: 2.8rem;
+      letter-spacing: 0.12rem;
       text-transform: uppercase;
       font-weight: 800;
     }
@@ -79,12 +80,12 @@
         align-items: center;
 
         &-icon {
-          fill: #ad5e13;
+          fill: #7d3d00e3;
           font-size: 3.2rem;
         }
 
         &-prop {
-          font-size: 0.8rem;
+          font-size: 1rem;
           font-weight: 600;
           text-transform: capitalize;
         }
@@ -92,6 +93,7 @@
         &-param {
           font-size: 1.2rem;
           font-weight: 700;
+          text-transform: uppercase;
           margin-left: 0.4rem;
         }
       }
@@ -100,7 +102,7 @@
     &-button {
       padding: 0.4rem 1rem;
       font-size: 1.6rem;
-      background-color: #ff922b;
+      background-image: linear-gradient(to bottom, rgb(255, 176, 30), #ff922b);
     }
   }
 }

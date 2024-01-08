@@ -33,9 +33,11 @@
         animation: Slide 1s forwards;
 
         &-category {
+          color: black;
           user-select: none;
-          font-size: 1.6rem;
-          font-weight: 600;
+          font-size: 1.8rem;
+          letter-spacing: 0.15rem;
+          font-weight: 800;
           text-transform: uppercase;
         }
       }
