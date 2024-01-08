@@ -127,7 +127,7 @@ const QuizSummary: FC<QuizSummaryProps> = ({
           <Link
             href={`${
               animation === `false`
-                ? `/quiz/${quizziesInfo.category}/${quizziesInfo.difficulty}`
+                ? `/quiz/preview/${quizziesInfo.category}/${quizziesInfo.difficulty}`
                 : `/`
             }`}
             className="quiz_container_quiz-summary-btn btn"
