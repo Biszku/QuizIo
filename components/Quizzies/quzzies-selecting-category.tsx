@@ -19,7 +19,7 @@ const QuizziesSelectingCategory = ({
         visibility ? "isVisible" : ""
       }`}
       style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(255, 146, 43, 0.73)),url(/mini-${category}.jpg)`,
+        backgroundImage: `linear-gradient(to bottom, rgb(253 255 228/ 50%), rgb(79 79 79)),url(/mini-${category}.jpg)`,
         animationDelay: `${0.05 * delay}s`,
       }}
       onClick={() => {
