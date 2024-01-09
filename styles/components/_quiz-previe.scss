@@ -31,13 +31,13 @@
 
   &--backdrop-filter {
     height: 80%;
-    width: 85%;
+    width: 90%;
     backdrop-filter: blur(0.5rem);
   }
 
   &_content {
     height: 80%;
-    width: 85%;
+    width: 90%;
     border-radius: 1rem;
     background-image: linear-gradient(
       to right bottom,
@@ -50,7 +50,7 @@
     align-items: center;
     justify-content: space-evenly;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    padding: 1rem;
+    padding: 1rem 0.5rem;
 
     position: absolute;
     top: 50%;
@@ -67,7 +67,7 @@
     }
 
     &-category {
-      font-size: 2.8rem;
+      font-size: 3.2rem;
       letter-spacing: 0.12rem;
       text-transform: uppercase;
       font-weight: 800;
@@ -84,7 +84,7 @@
         align-items: center;
 
         &-icon {
-          fill: #7d3d00e3;
+          fill: #804916;
           font-size: 3.2rem;
         }
 

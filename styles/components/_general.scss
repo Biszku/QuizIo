@@ -33,9 +33,9 @@
         animation: Slide 1s forwards;
 
         &-category {
-          color: black;
+          color: #1a1a1a;
           user-select: none;
-          font-size: 1.8rem;
+          font-size: 2rem;
           letter-spacing: 0.15rem;
           font-weight: 800;
           text-transform: uppercase;
@@ -82,7 +82,7 @@
 
       &_link {
         display: grid;
-        border-radius: 0.5rem 0.5rem 0rem 0rem;
+        border-radius: 0.5rem;
         overflow: hidden;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr max-content;
@@ -94,7 +94,29 @@
           transform: scale(0.97);
         }
 
+        &-span-difficult {
+          user-select: none;
+          font-size: 1.8rem;
+          letter-spacing: 0.15rem;
+          font-weight: 800;
+          text-transform: uppercase;
+        }
+
+        &-span-easy {
+          color: #98ffae;
+        }
+
+        &-span-medium {
+          color: #fdff98;
+        }
+
+        &-span-hard {
+          color: #ff9898;
+        }
+
         &-background {
+          display: grid;
+          place-items: center;
           background-position: center;
           background-size: cover;
           background-repeat: no-repeat;
@@ -136,6 +158,7 @@
 
       &-item {
         flex: 1;
+        border: 0.1rem solid #ababab;
         box-shadow: rgba(0, 0, 0, 0.24) 0rem 0.3rem 0.8rem;
 
         &_link {

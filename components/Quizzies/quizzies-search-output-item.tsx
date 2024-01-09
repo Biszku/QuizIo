@@ -18,15 +18,15 @@ const QuizziesSearchOutputItem: FC<DataFromProps> = ({
         <div
           className="general-container_search-item_link-background"
           style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.23)),url(/mini-${category}.jpg)`,
+            backgroundImage: `linear-gradient(rgb(101 101 101 / 68%), rgba(59, 59, 59, 0.77), rgb(83 83 83 / 68%)),url(/mini-${category}.jpg)`,
           }}
-        ></div>
-        <span className="general-container_search-item_link-category">
-          {category}
-        </span>
-        <span className="general-container_search-item_link-difficult">
-          {difficult}
-        </span>
+        >
+          <span
+            className={`general-container_search-item_link-span-difficult general-container_search-item_link-span-${difficult}`}
+          >
+            {difficult}
+          </span>
+        </div>
       </Link>
     </div>
   );
