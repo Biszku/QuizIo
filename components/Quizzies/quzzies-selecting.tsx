@@ -2,7 +2,6 @@
 import { HiChevronDown } from "react-icons/hi";
 import { useContext } from "react";
 import { MainContext } from "../../context/context";
-import { useEffect } from "react";
 
 const QuizziesSelecting = () => {
   const { changeVisibility, visibilityOfCategoryList } =
