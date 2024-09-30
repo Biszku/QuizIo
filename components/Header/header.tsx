@@ -7,7 +7,6 @@ const Header = () => {
       <Logo />
       {/* Waiting for Back End Skills */}
       {/* <Login /> */}
-      <p>xd</p>
     </header>
   );
 };
